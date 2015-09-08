@@ -13,8 +13,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   projects/index.rst
    server/index.rst
-   server/push-duty.rst
    ux/index.rst
 
 Filing bugs:
