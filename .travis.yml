@@ -1,0 +1,16 @@
+language: python
+sudo: false
+python:
+  - "2.7"
+env:
+  - TOX_ENV=docs
+install:
+  - pip install -rrequirements/docs.txt
+script:
+  - cd docs && make clean html linkcheck SPHINXOPTS='-nW'
+notifications:
+  irc:
+    channels:
+      - "irc.mozilla.org#amo-bots"
+    on_success: change
+    on_failure: always
