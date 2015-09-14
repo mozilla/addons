@@ -7,13 +7,22 @@ The pushing of the server rotates each week to another developer. Current rotati
 * kumar
 * magopian
 * muffinresearch
+* nolski
 * tofumatt
+
+Check out the `Add-ons calendar <https://www.google.com/calendar/embed?src=mozilla.com_lr5jsh38i6dmr72uu4d1nv7dcc%40group.calendar.google.com&ctz=America/Vancouver>`_ for a list of events.
 
 Before the push
 ---------------
 
-The code that will go in production on thursday is tagged on tuesday. It's
-usually the master branch that is tagged::
+The code that will go in production on Thursday is tagged on Tuesday. The
+following repositories are tagged:
+
+    * `olympia <https://github.com/mozilla/olympia/>`_
+
+Tags are of the format: YYYY.MM.DD
+
+It's usually the master branch that is tagged::
 
     $ git checkout master
     $ git pull
@@ -44,7 +53,7 @@ ops jenkins: click on "build with parameters", and enter the tag (eg
 Push
 ----
 
-The tag is pushed to production by Jason, once approved by Krupa, on thursdays.
+The tag is pushed to production by Jason, once approved by Krupa, on Thursdays.
 It is the responsibility of the push hero to follow-up with Krupa and Jason,
 and be around during the push for any unexpected issues.
 
