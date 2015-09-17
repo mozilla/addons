@@ -10,10 +10,13 @@ The pushing of the server rotates each week to another developer. Current rotati
 * nolski
 * tofumatt
 
-Check out the `Add-ons calendar <https://www.google.com/calendar/embed?src=mozilla.com_lr5jsh38i6dmr72uu4d1nv7dcc%40group.calendar.google.com&ctz=America/Vancouver>`_ for a list of events.
+Check out the `Add-ons calendar <https://www.google.com/calendar/embed?src=mozilla.com_lr5jsh38i6dmr72uu4d1nv7dcc%40group.calendar.google.com>`_ for a list of events.
 
 Before the push
 ---------------
+
+Tag the repos
++++++++++++++
 
 The code that will go in production on Thursday is tagged on Tuesday. The
 following repositories are tagged:
@@ -45,6 +48,9 @@ https://etherpad.mozilla.org/amo-2015-09-10
 You can use this handy template:
 
 .. literalinclude:: /server/push_etherpad.tpl
+
+Push to stage
++++++++++++++
 
 Once the tag is done, it needs to be pushed to the staging server, using the
 ops jenkins: click on "build with parameters", and enter the tag (eg
