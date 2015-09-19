@@ -62,6 +62,13 @@ Tracking bugs:
 
 More details:
 
+Some random diagrams
+--------------------
+
+.. image:: rewrite/diagrams/overview.png
+
+.. image:: rewrite/diagrams/review-tools.png
+
 Roadmap
 -------
 
