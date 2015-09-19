@@ -10,5 +10,6 @@ Contents:
    go-faster.rst
    js-validator.rst
    signing.rst
+   signing-api.rst
    submission-api.rst
    web-extensions-api.rst
