@@ -5,15 +5,14 @@ This refers primarily to the work done by the Add-ons team at Mozilla.
 
 If you are an Add-on Developer wanting to work on developing an Add-on for
 Firefox, then you probably do not want to be looking at this documentation.
-Instead checkout `MDN <https://developer.mozilla.org>`_
-or `AMO <http://addons.mozilla.org>`_.
+Instead checkout `MDN <https://developer.mozilla.org/en-US/>`_
+or `AMO <https://addons.mozilla.org/en-US/firefox/>`_.
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
-   projects/index.rst
    server/index.rst
    ux/index.rst
 

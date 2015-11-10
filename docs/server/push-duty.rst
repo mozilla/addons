@@ -12,7 +12,7 @@ The pushing of the server rotates each week to another developer. Current rotati
 * nolski
 * tofumatt
 
-Check out the `Add-ons calendar <https://www.google.com/calendar/embed?src=mozilla.com_lr5jsh38i6dmr72uu4d1nv7dcc%40group.calendar.google.com>`_ for a list of events.
+Check out the `Add-ons calendar <https://calendar.google.com/calendar/embed?src=mozilla.com_lr5jsh38i6dmr72uu4d1nv7dcc@group.calendar.google.com>`_ for a list of events.
 
 Before the push
 ---------------
@@ -52,8 +52,10 @@ Push to stage
 +++++++++++++
 
 Once the tag is done, it needs to be pushed to the staging server, using the
-ops jenkins: click on "build with parameters", and enter the tag (eg
-2015.09.10). Jason can help with that if needed.
+ops jenkins (you can find the Stage Jenkins URL on
+`mana <https://mana.mozilla.org/wiki/display/SVCOPS/AMO+Dev+Resources#AMODevResources-StageandProd>`_):
+click on "build with parameters", and enter the tag (eg
+``2015.09.10``). Jason can help with that if needed.
 
 Before the push
 +++++++++++++++
@@ -86,7 +88,7 @@ Once complete
 
 Create a new etherpad page for the *next push*, for example:
 
-https://etherpad.mozilla.org/amo-2015-09-10
+https://public.etherpad-mozilla.org/p/amo-2015-11-12
 
 You can use this handy template:
 
