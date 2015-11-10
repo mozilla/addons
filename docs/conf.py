@@ -299,4 +299,5 @@ linkcheck_ignore = [
     # Both of these links require you to be behind the VPN.
     'http://sentry.mktmon.services.phx1.mozilla*',
     'http://dashboard.mktadm.ops.services.phx1.mozilla.com*',
+    'https://mana.mozilla.org*',
 ]
