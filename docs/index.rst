@@ -13,7 +13,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   projects/index.rst
    server/index.rst
    ux/index.rst
 
