@@ -296,8 +296,11 @@ texinfo_documents = [
 #texinfo_no_detailmenu = False
 
 linkcheck_ignore = [
-    # Both of these links require you to be behind the VPN.
+    # These links require you to be behind the VPN.
     'http://sentry.mktmon.services.phx1.mozilla*',
     'http://dashboard.mktadm.ops.services.phx1.mozilla.com*',
     'https://mana.mozilla.org*',
+    # For some unknown reason, TravisCI gets a 404 for calendar URLs.
+    # They require a login so maybe that's why.
+    'https://calendar.google.com/calendar/embed*',
 ]
