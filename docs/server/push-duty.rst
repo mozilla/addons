@@ -52,8 +52,10 @@ Push to stage
 +++++++++++++
 
 Once the tag is done, it needs to be pushed to the staging server, using the
-ops jenkins: click on "build with parameters", and enter the tag (eg
-2015.09.10). Jason can help with that if needed.
+ops jenkins (you can find the Stage Jenkins URL on
+`mana <https://mana.mozilla.org/wiki/display/SVCOPS/AMO+Dev+Resources#AMODevResources-StageandProd>`_):
+click on "build with parameters", and enter the tag (eg
+``2015.09.10``). Jason can help with that if needed.
 
 Before the push
 +++++++++++++++
