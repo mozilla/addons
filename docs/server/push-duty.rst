@@ -75,13 +75,12 @@ Monitoring the push
 
 The best places to monitor the results of the push are:
 
-* `Sentry <http://sentry.mktmon.services.phx1.mozilla.com/mkt/addonsmozillaorg/>`_
-* `Graphite <http://dashboard.mktadm.ops.services.phx1.mozilla.com/graphite?site=addons&graph=all-responses>`_
+* `Sentry <https://sentry.prod.mozaws.net/operations/olympia-prod/>`_
+* `Data Dog <https://app.datadoghq.com/dash/78168/addons-prod?live=true&page=0&is_auto=false&tile_size=m>`_
 
-.. note:: Both of these URLs require you to be logged into Mozilla VPN.
-
-Graphite should show no large spikes or changes. Sentry should show no new errors, although
-it will show intermittent errors and the occasional error as the push occurs.
+The site performance graphs should show no large spikes or changes.
+Sentry should show no new errors, although it will show intermittent errors and the occasional
+error as the push occurs.
 
 Once complete
 +++++++++++++
