@@ -98,6 +98,9 @@ that the push is done with any issues. Here's the template:
 
 .. literalinclude:: /server/push_email.tpl
 
+Set the topic of the #amo channel to include the new etherpad link and the IRC nick of next
+week's push hero.
+
 Future Goals
 ------------
 
