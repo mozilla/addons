@@ -4,7 +4,8 @@ AMO to Firefox Account Migration UX Specs
 
 So that I can reduce the numbers of logins I have, as a Mozilla Add-ons user, I want to switch from using my AMO login and start using a Firefox Account.
 
-## User Flow Diagram (refer only to Email Funnel tab)
+## User Flow Diagram
+Red line denotes common post-migration login experience.
 ![User Flow Diagram](https://www.lucidchart.com/publicSegments/view/c45f10ff-5084-407d-8322-cbc8b6cd25be/image.png)
 
 ## Migrating from AMO
