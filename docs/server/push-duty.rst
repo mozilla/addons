@@ -9,7 +9,6 @@ The pushing of the server rotates each week to another developer. Current rotati
 * magopian
 * mstriemer
 * muffinresearch
-* nolski
 * tofumatt
 
 Check out the `Add-ons calendar <https://calendar.google.com/calendar/embed?src=mozilla.com_lr5jsh38i6dmr72uu4d1nv7dcc@group.calendar.google.com>`_ for a list of events.
