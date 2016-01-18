@@ -13,6 +13,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   repositories.rst
    browser/index.rst
    server/index.rst
    ux/index.rst
