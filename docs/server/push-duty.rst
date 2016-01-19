@@ -75,7 +75,10 @@ Monitoring the push
 The best places to monitor the results of the push are:
 
 * `Sentry <https://sentry.prod.mozaws.net/operations/olympia-prod/>`_
-* `Data Dog <https://app.datadoghq.com/dash/78168/addons-prod?live=true&page=0&is_auto=false&tile_size=m>`_
+* Data Dog
+
+  * `System dashboard <https://app.datadoghq.com/dash/78168/addons-prod>`_
+  * `App dashboard <https://app.datadoghq.com/dash/87897/addons-apps>`_
 
 The site performance graphs should show no large spikes or changes.
 Sentry should show no new errors, although it will show intermittent errors and the occasional
