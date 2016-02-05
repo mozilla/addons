@@ -22,7 +22,7 @@ Tag the repos
 The code that will go in production on Thursday is tagged on Tuesday. The
 following repositories are tagged:
 
-    * `olympia <https://github.com/mozilla/olympia/>`_
+    * `addons-server <https://github.com/mozilla/addons-server/>`_
 
 Tags are of the format: YYYY.MM.DD,
 

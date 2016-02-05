@@ -12,7 +12,7 @@ to be in chronological order, first to cherry-pick on top.:
 
 Pushing:
 
-    https://github.com/mozilla/olympia/compare/YYYY.MM.DD...YYYY.MM.DD
+    https://github.com/mozilla/addons-server/compare/YYYY.MM.DD...YYYY.MM.DD
 
 
 Before we push:
