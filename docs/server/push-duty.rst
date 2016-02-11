@@ -24,7 +24,7 @@ following repositories are tagged:
 
     * `addons-server <https://github.com/mozilla/addons-server/>`_
 
-Tags are of the format: YYYY.MM.DD,
+Tags are of the format: ``YYYY.MM.DD``,
 
 .. note:: the date is the date of the push, not the date of tagging.
 
@@ -33,24 +33,49 @@ It's usually the master branch that is tagged::
     $ git checkout master
     $ git pull
     $ git tag 2015.09.10
-    $ git push --tags
+    $ git push upstream 2015.09.10
+
+.. note:: Here we are using "upstream" as the remote. If yours is different
+   you can substitute "upstream" for whatever you call the ``mozilla/addons-server``
+   repo remote.
 
 Get a compare link from github to compare this tag to the last tag. Add that
 compare link to the etherpad so that people can clearly see what is pushing.
 
 If tagging the master branch can't be done (some feature is already on master,
-but not ready for production), then instead the commits that need to go in
-production should be cherry-picked::
+but not ready for production), then the commits that need to be released
+should be cherry-picked
 
-    $ git checkout 2015.09.03  # Previous tag pushed to production.
-    $ git cherry-pick <commit hash>
-    $ git tag 2015.09.10
-    $ git push --tags
+If you're adding cherry-picks to a tag that already exists, it makes sense to
+create a new tag rather than overwrite the old one. The reason for this is that
+re-using a tag makes it less easy to see the process that was involved in arriving
+at that tag. Also, it's entirely possible to make a mistake by using an old tag
+that exists locally rather than the newer version on the remote when tags are
+re-used.
+
+When creating a new tag you can use the format ``YYYY.MM.DD-SUFFIX`` where suffix
+is a number that's incremented with each revision. The first time this is done
+will look like this::
+
+    $ git checkout 2015.09.03
+    $ git cherry-pick <commit hash> # as many times as you need
+    $ git tag 2015.09.10-1
+    $ git push upstream 2015.09.10-1
+
+And the second::
+
+    $ git checkout 2015.09.03-1
+    $ git cherry-pick <commit hash> # as many times as you need
+    $ git tag 2015.09.10-2
+    $ git push upstream 2015.09.10-2
+
+Then update the etherpad with the new comparison link for the updated tag.
+
 
 Push to stage
 +++++++++++++
 
-Once the tag is done, it needs to be pushed to the staging server, using the
+Once the tag is ready, it needs to be pushed to the staging server, using the
 ops jenkins (you can find the Stage Jenkins URL on
 `mana <https://mana.mozilla.org/wiki/display/SVCOPS/AMO+Dev+Resources#AMODevResources-StageandProd>`_):
 click on "build with parameters", and enter the tag (eg
