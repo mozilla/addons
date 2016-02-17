@@ -9,3 +9,5 @@ Contents:
    :maxdepth: 2
 
    fxa-migration.rst
+   ux-management.rst
+   ux-submission.rst
