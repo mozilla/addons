@@ -17,6 +17,7 @@ Contents:
    browser/index.rst
    server/index.rst
    ux/index.rst
+   random/index.rst
 
 Filing bugs:
 
