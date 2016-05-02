@@ -10,7 +10,7 @@ website then please [file an issue on this project](https://github.com/mozilla/a
 ## Documentation
 
 This project contains general documentation relating to the Add-ons project.
-[You can view the docs here](https://addons.readthedocs.org).
+[You can view the docs here](https://addons.readthedocs.io).
 
 If you would like to contribute to the docs, here's how to set up a development
 environment:
