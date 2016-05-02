@@ -25,22 +25,22 @@ Almost everything else is on GitHub and issues are tracked in GitHub. This is a 
 
 addons
 ~~~~~~
-`These docs <https://addons.readthedocs.org>`__ and an issue tracker. `This repository <https://github.com/mozilla/addons>`__ serves as an umbrella for everything add-ons.
+`These docs <https://addons.readthedocs.io>`__ and an issue tracker. `This repository <https://github.com/mozilla/addons>`__ serves as an umbrella for everything add-ons.
 Bug tracker is in GitHub and can be used for almost anything add-ons related. `Existing bugs <https://github.com/mozilla/addons/issues/>`__.
 
 addons-server
 ~~~~~~~~~~~~~
-The `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/addons-server>`_ is on GitHub. The preferred bug tracker is `github <https://GitHub.com/mozilla/addons-server/issues/>`__ although components do exist on bugzilla for legacy bugs. Documentation is `on readthedocs <https://addons-server.readthedocs.org>`__.
+The `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/addons-server>`_ is on GitHub. The preferred bug tracker is `github <https://GitHub.com/mozilla/addons-server/issues/>`__ although components do exist on bugzilla for legacy bugs. Documentation is `on readthedocs <https://addons-server.readthedocs.io>`__.
 
 In the past this repository has been known as *remora*, *zamboni* or *olympia*.
 
 amo-validator
 ~~~~~~~~~~~~~
-The legacy Python version of the validator for the `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/amo-validator>`__ is on GitHub. The preferred bug tracker is `GitHub <https://github.com/mozilla/amo-validator/issues/>`__ although components do exist on bugzilla for legacy bugs. Documentation is `on readthedocs <https://addons-server.readthedocs.org>`__.
+The legacy Python version of the validator for the `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/amo-validator>`__ is on GitHub. The preferred bug tracker is `GitHub <https://github.com/mozilla/amo-validator/issues/>`__ although components do exist on bugzilla for legacy bugs. Documentation is `on readthedocs <https://addons-server.readthedocs.io>`__.
 
 addons-linter
 ~~~~~~~~~~~~~
-The new JavaScript version of the validator for the `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/addons-linter>`__ is on GitHub. The bug tracker is `GitHub <https://github.com/mozilla/addons-linter/issues/>`__. Documentation is `on readthedocs <https://addons-server.readthedocs.org>`__. See also `dispensary <https://github.com/mozilla/dispensary>`__.
+The new JavaScript version of the validator for the `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/addons-linter>`__ is on GitHub. The bug tracker is `GitHub <https://github.com/mozilla/addons-linter/issues/>`__. Documentation is `on readthedocs <https://addons-server.readthedocs.io>`__. See also `dispensary <https://github.com/mozilla/dispensary>`__.
 
 jpm
 ~~~
