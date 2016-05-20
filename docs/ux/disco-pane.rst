@@ -8,8 +8,11 @@ So I can find useful and trusted add-ons, as a new add-ons user, I want to brows
 Intro Video
 -----------
   .. image:: ../images/video-thumb.png
+
 * When a user clicks "Click to play", the copy to the left of the video thumbnail will fade away and the thumbnail will expand down and to the left.
+
   .. image:: ../images/video-expanded.png
+
 * When a user clicks "close video" below the expanded video, the video will shrink up and to the right back to its original position. The copy to the left will fade back in.
 
 Switch Interaction

@@ -8,6 +8,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   disco-pane.rst
    fxa-migration.rst
    ux-management.rst
    ux-submission.rst
