@@ -5,7 +5,7 @@ So I can find useful and trusted add-ons, as a new add-ons user, I want to brows
 
 .. image:: ../images/disco-pane.png
 
-'Intro Video <https://github.com/mozilla/addons/issues/83>'
+`Intro Video <https://github.com/mozilla/addons/issues/83>`
 -----------
 .. image:: ../images/video-thumb.png
 
@@ -15,7 +15,7 @@ So I can find useful and trusted add-ons, as a new add-ons user, I want to brows
 
 * When a user clicks "close video" below the expanded video, the video will shrink up and to the right back to its original position. The copy to the left will fade back in.
 
-'Switch Interaction <https://github.com/mozilla/addons/issues/63>'
+`Switch Interaction <https://github.com/mozilla/addons/issues/63>`
 ------------------
 
 .. image:: ../images/switch.png
