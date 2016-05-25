@@ -3,6 +3,12 @@ Add-ons Discovery Pane UX Specs
 
 So I can find useful and trusted add-ons, as a new add-ons user, I want to browse from a small list of curated content.
 
+changelog
+---------
+May 25
+- Changed app icon background to #ffffff.
+- Added new screen for 2nd or 3rd visit user prompts (still a wip)
+
 .. image:: ../images/disco-pane.png
 
 `Intro Video <https://github.com/mozilla/addons/issues/83>`_
