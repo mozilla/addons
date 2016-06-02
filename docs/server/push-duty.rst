@@ -23,6 +23,7 @@ The code that will go in production on Thursday is tagged on Tuesday. The
 following repositories are tagged:
 
     * `addons-server <https://github.com/mozilla/addons-server/>`_
+    * `addons-frontend <https://github.com/mozilla/addons-frontend/>`_
 
 Tags are of the format: ``YYYY.MM.DD``,
 
