@@ -5,6 +5,9 @@ So I can find useful and trusted add-ons, as a new add-ons user, I want to brows
 
 changelog
 ---------
+July 12
+- Added a slight drop shadow behind the extension/theme blocks.
+
 May 25
 - Changed app icon background to #ffffff.
 - Added new screen for 2nd or 3rd visit user prompts (still a wip)
