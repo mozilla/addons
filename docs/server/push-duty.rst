@@ -27,7 +27,12 @@ following repositories are tagged:
 
 Tags are of the format: ``YYYY.MM.DD``,
 
-.. note:: the date is the date of the push, not the date of tagging.
+.. note:: The date is the date of the push, not the date of tagging.
+
+.. note:: Once addons-frontend has been tagged a new docker image will be
+   built on `Docker Hub
+   <https://hub.docker.com/r/addons/addons-frontend/builds/>`_ and is
+   required to deploy to stage.
 
 It's usually the master branch that is tagged::
 
@@ -76,11 +81,10 @@ Then update the etherpad with the new comparison link for the updated tag.
 Push to stage
 +++++++++++++
 
-Once the tag is ready, it needs to be pushed to the staging server, using the
-ops jenkins (you can find the Stage Jenkins URL on
-`mana <https://mana.mozilla.org/wiki/display/SVCOPS/AMO+Dev+Resources#AMODevResources-StageandProd>`_):
-click on "build with parameters", and enter the tag (eg
-``2015.09.10``). Jason can help with that if needed.
+Once the tag is ready and any needed docker containers have been buit, it
+needs to be pushed to the staging server, using the `IRC bot in #amopush
+<https://mana.mozilla.org/wiki/display/SVCOPS/AMO+Dev+Resources#AMODevResources-DeployingwithJenkinsBot>`_.
+Jason can help with that if needed.
 
 Before the push
 +++++++++++++++
