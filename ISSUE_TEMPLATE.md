@@ -1,9 +1,8 @@
-### What did you do?
-(Please include as many details as possible.)
+### Describe the problem and steps to reproduce it:
 
-### What happened?
+### Actual results:
 
-### What did you expect to happen?
+### Expected results:
 
 ### Anything else we should know?
 (Please include a link to the page, screenshots and any relevant files.)
