@@ -48,8 +48,7 @@ Tags are of the format: ``YYYY.MM.DD``,
 .. note:: The date is the date of the push, not the date of tagging.
 
 .. note:: Once addons-frontend has been tagged a new docker image will be
-   built on `Docker Hub
-   <https://hub.docker.com/r/addons/addons-frontend/builds/>`_ and is
+   built on `Docker Hub`_ and is
    required to deploy to stage.
 
 It's usually the master branch that is tagged::
@@ -99,10 +98,32 @@ Then update the etherpad with the new comparison link for the updated tag.
 Push to stage
 +++++++++++++
 
-Once the tag is ready and any needed docker containers have been built, it
+Once the tag is ready and any needed
+`Docker Hub`_ containers have been built, it
 needs to be pushed to the staging server, using the `IRC bot in #amopush
 <https://mana.mozilla.org/wiki/display/SVCOPS/AMO+Dev+Resources#AMODevResources-DeployingwithJenkinsBot>`_.
-Jason can help with that if needed.
+Consult the IRC bot docs for more up to date information but here are examples
+of commands you would run to deploy all the apps to stage:
+
+* ``!build addons-stage YYYY.MM.DD``
+* ``!build admin-stage YYYY.MM.DD``
+* ``!build discopane-stage YYYY.MM.DD``
+* ``!build versioncheck-stage YYYY.MM.DD``
+
+Each of these apps live in the code respositories that are listed for tagging up
+above.
+
+When you run each command in ``#amopush`` you will soon see a
+``Job amo-xxxx-BUILD succeeded``
+message. Do not be fooled! This doesn't mean the change is live. You need to
+wait and watch for each ``amo-xxx-Promote succeeded`` message in ``#remora``.
+The *Promote* message indicates that it's live on the server.
+Here is an example of a *Promote* message to indicate the changes are live
+on the server::
+
+    <cloudops-hubot> amo-olympia-web-STAGE-Promote build #156 succeeded (https://deploy.mozaws.net/job/amo-olympia-web-STAGE-Promote/156/)
+
+Jason can help with this if needed.
 
 Before the push
 +++++++++++++++
@@ -155,3 +176,5 @@ Future Goals
 ------------
 
 Move to continuous deployment and change the way this is done dramatically.
+
+.. _`Docker Hub`: https://hub.docker.com/r/addons/addons-frontend/builds/
