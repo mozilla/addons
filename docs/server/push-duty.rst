@@ -40,6 +40,41 @@ This way we can ensure that:
 Making multiple releases of a package during a weekly milestone is totally
 fine since this helps with testing smaller sets of changes.
 
+Security Fixes
+++++++++++++++
+
+Security fixes for addons-server live on a separate private repository:
+
+    * `addons-server-security <https://github.com/mozilla/addons-server-security>`_
+
+To make merging easier, when making a pull request against this repository, the
+remote branch should not be published to one's fork but to the repository
+itself. Once the PR has been reviewed, it should *not* be merged right away.
+Instead, merging to master is part of push duty and happens right before
+tagging::
+
+  $ git checkout master
+  $ git pull
+  $ git fetch security
+  $ git merge security/<branch-name>
+  $ git diff upstream/master
+  $ git push upstream master
+  $ git push security master
+
+.. note:: ``mozilla/addons-server-security`` ``master`` branch should never be
+  pushed to directly without pushing to ``mozilla/addons-server`` ``master``
+  first - the two should always stay in sync.
+  
+  This means the merge or edit buttons in github web UI must never be used in
+  that repository.
+
+.. note:: Here we are using "upstream" and "security" remotes, which point out
+  to ``mozilla/addons-server`` and ``mozilla/addons-server``, respectively. If
+  your configuration is different you can substitute "upstream" and "security"
+  for whatever you call the ``mozilla/addons-server`` and
+  ``mozilla/addons-server-security`` repositories remotes.
+
+
 Tag the repos
 +++++++++++++
 
