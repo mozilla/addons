@@ -303,4 +303,6 @@ linkcheck_ignore = [
     # For some unknown reason, TravisCI gets a 404 for calendar URLs.
     # They require a login so maybe that's why.
     'https://calendar.google.com/calendar/embed*',
+    # This is a private URL.
+    'https://github.com/mozilla/addons-server-security',
 ]
