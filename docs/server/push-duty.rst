@@ -64,15 +64,16 @@ tagging::
 .. note:: ``mozilla/addons-server-security`` ``master`` branch should never be
   pushed to directly without pushing to ``mozilla/addons-server`` ``master``
   first - the two should always stay in sync.
-  
+
   This means the merge or edit buttons in github web UI must never be used in
   that repository.
 
-.. note:: Here we are using "upstream" and "security" remotes, which point out
-  to ``mozilla/addons-server`` and ``mozilla/addons-server``, respectively. If
-  your configuration is different you can substitute "upstream" and "security"
-  for whatever you call the ``mozilla/addons-server`` and
-  ``mozilla/addons-server-security`` repositories remotes.
+.. note:: Here we are using ``upstream`` and ``security`` remotes, which point
+  to ``mozilla/addons-server`` and ``mozilla/addons-server-security``,
+  respectively. If your configuration is different you can substitute
+  ``upstream`` and ``security`` for whatever you call the 
+  ``mozilla/addons-server`` and ``mozilla/addons-server-security``
+  repositories' remotes.
 
 
 Tag the repos
