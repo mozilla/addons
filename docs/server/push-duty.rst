@@ -71,7 +71,7 @@ tagging::
 .. note:: Here we are using ``upstream`` and ``security`` remotes, which point
   to ``mozilla/addons-server`` and ``mozilla/addons-server-security``,
   respectively. If your configuration is different you can substitute
-  ``upstream`` and ``security`` for whatever you call the 
+  ``upstream`` and ``security`` for whatever you call the
   ``mozilla/addons-server`` and ``mozilla/addons-server-security``
   repositories' remotes.
 
@@ -194,7 +194,7 @@ Once complete
 
 Create a new etherpad page for the *next push*, for example:
 
-https://public.etherpad-mozilla.org/p/amo-2015-11-12
+https://public.etherpad-mozilla.org/p/amo-2016.10.06
 
 You can use this handy template:
 
