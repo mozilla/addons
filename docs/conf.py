@@ -305,4 +305,6 @@ linkcheck_ignore = [
     'https://calendar.google.com/calendar/embed*',
     # This is a private URL.
     'https://github.com/mozilla/addons-server-security',
+    # TravisCI doesn't like CircleCI (or otherwise) so we get a 404
+    'https://circleci.com/gh/mozilla*'
 ]
