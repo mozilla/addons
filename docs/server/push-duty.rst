@@ -84,7 +84,7 @@ Tags are of the format: ``YYYY.MM.DD``,
 .. note:: The date is the date of the push, not the date of tagging.
 
 .. note:: Once addons-frontend has been tagged a new docker image will be
-   built on `Docker Hub`_ and is
+   built on `CircleCI`_ and is
    required to deploy to stage.
 
 It's usually the master branch that is tagged::
@@ -135,7 +135,7 @@ Push to stage
 +++++++++++++
 
 Once the tag is ready and any needed
-`Docker Hub`_ containers have been built, it
+`CircleCI`_ containers have been built, it
 needs to be pushed to the staging server, using the `IRC bot in #amopush
 <https://mana.mozilla.org/wiki/display/SVCOPS/AMO+Dev+Resources#AMODevResources-DeployingwithJenkinsBot>`_.
 Consult the IRC bot docs for more up to date information but here are examples
@@ -213,4 +213,4 @@ Future Goals
 
 Move to continuous deployment and change the way this is done dramatically.
 
-.. _`Docker Hub`: https://hub.docker.com/r/addons/addons-frontend/builds/
+.. _`CircleCI`: https://circleci.com/gh/mozilla/addons-frontend
