@@ -139,7 +139,7 @@ been pushed up to the repository.
 The only required step is to check the tag has deployed by looking out for
 the automated push messages in the irc channel.
 
-You can also check ``/__version`` on a given service which shows the currently
+You can also check ``/__version__`` on a given service which shows the currently
 deployed revision and tag e.g:
 
  * `Addons Server (stage) <https://addons.allizom.org/__version__>`_
