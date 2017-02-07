@@ -306,5 +306,6 @@ linkcheck_ignore = [
     # This is a private URL.
     'https://github.com/mozilla/addons-server-security',
     # TravisCI doesn't like CircleCI (or otherwise) so we get a 404
-    'https://circleci.com/gh/mozilla*'
+    'https://circleci.com/gh/mozilla*',
+    'https://app.datadoghq.com/*'
 ]
