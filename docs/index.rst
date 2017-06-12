@@ -15,6 +15,7 @@ Contents:
 
    repositories.rst
    browser/index.rst
+   l10n.rst
    server/index.rst
    ux/index.rst
    random/index.rst
