@@ -55,6 +55,8 @@ to be routed to the new frontend you either need:
       "View mobile site" in the footer.
     * A Mobile user-agent string.
 
+.. image:: images/view-mobile-site-link.png
+
 Discovery-Pane app
 ++++++++++++++++++
 
@@ -64,6 +66,17 @@ which is the site containing curated addons available at about:addons
 
 Whilst this looks like it's part of firefox it's actually a webpage served
 from ``https://discovery.addons.mozilla.org``.
+
+To access the disco pane directly you'll need to use a full path. The URL
+used is defined in about:config as: ``extensions.webservice.discoverURL``.
+
+e.g: ``https://discovery.addons.mozilla.org/%LOCALE%/firefox/discovery/pane/%VERSION%/%OS%/%COMPATIBILITY_MODE%``
+
+The parts of the string wrapped with ``%`` are replaced so the actual URL
+might be something like: https://discovery.addons.mozilla.org/en-US/firefox/discovery/pane/57.0a1/Darwin/normal
+
+See `Advanced Configuration for testing addons-frontend strings`_ for further
+instructions on how to setup your browser to test this properly.
 
 Discovery Pane editorial content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -94,7 +107,7 @@ To fully configure Firefox to install add-ons on either dev/stage you will
 need to additionally do the following:
 
     * Use Firefox Nightly or Firefox Developer Edition
-    * A new profile is recommended since changing the dev certs will mark
+    * A `new profile`_ is recommended since changing the dev certs will mark
       existing add-on installs as invalid (this change is not immediate).
     * Go to ``about:config`` and set ``extensions.webapi.testing`` as a
       Boolean to ``true``.
@@ -143,6 +156,12 @@ The debug locales are called ``dbl`` (Debug left to right) and ``dbr``
 and it is both HTML and placeholder aware, to provide more accurate
 simulated localizations.
 
+To access a debug locale simply replace the current locale in the url of the
+page you are on.
+
+E.g: ``https://addons-dev.allizom.org/en-US/firefox/`` becomes
+``https://addons-dev.allizom.org/dbr/firefox/``.
+
 
 .. _`dev`: https://addons-dev.allizom.org
 .. _`stage`: https://addons.allizom.org
@@ -150,3 +169,5 @@ simulated localizations.
 .. _`Pontoon`: https://pontoon.mozilla.org/
 .. _`addons-server on Pontoon`: https://pontoon.mozilla.org/projects/amo/info/
 .. _`addons-frontend on Pontoon`: https://pontoon.mozilla.org/projects/amo-frontend/info/
+.. _`new profile`: https://support.mozilla.org/kb/profile-manager-create-and-remove-firefox-profiles
+
