@@ -16,8 +16,9 @@ Before the push
 ---------------
 
 
-The code that will go in production on Thursday is tagged on Tuesday. The
-following repositories are tagged:
+The code that will go in production on Thursday is tagged on Tuesday
+at `16:00 GMT <http://www.timebie.com/std/gmt.php?q=16>`_.
+The following repositories are tagged:
 
     * `addons-server <https://github.com/mozilla/addons-server/>`_
     * `addons-frontend <https://github.com/mozilla/addons-frontend/>`_
