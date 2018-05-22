@@ -145,6 +145,7 @@ You can also check ``/__version__`` on a given service which shows the currently
 deployed revision and tag e.g:
 
  * `Addons Server (stage) <https://addons.allizom.org/__version__>`_
+ * `Addons Frontend (stage) <https://addons.allizom.org/__frontend_version__>`_
  * `Addons Frontend Disco Pane (stage) <https://discovery.addons.allizom.org/__version__>`_
 
 Before the push
