@@ -179,20 +179,20 @@ error as the push occurs.
 Once complete
 +++++++++++++
 
-Create a new etherpad page for the *next push*, for example:
+Create a new github document for the *next push*, for example:
 
-https://public.etherpad-mozilla.org/p/amo-2016.10.06
+https://github.com/mozilla/addons/blob/master/releases/2018/08/16.md
 
 You can use this handy template:
 
 .. literalinclude:: /server/push_etherpad.tpl
 
-After completing a push, send an email to the dev.addons mailing list saying
+After completing a push, send an email to the dev-addons mailing list saying
 that the push is done with any issues. Here's the template:
 
 .. literalinclude:: /server/push_email.tpl
 
-Set the topic of the `#amo` and `#remora` channels to include the new etherpad link and
+Set the topic of the `#amo` and `#remora` channels to include the new github doc link and
 the IRC nick of next week's push hero.
 
 Future Goals
