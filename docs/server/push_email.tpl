@@ -9,3 +9,6 @@ Issues:
 Next Push:
     <push hero>
     https://github.com/mozilla/addons/blob/master/releases/YYYY/MM/DD.md
+
+Per the tradition of keeping this email fun to read,
+[add something fun like music or a cat video or anything].

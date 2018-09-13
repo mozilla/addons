@@ -10,8 +10,10 @@ This week's push hero is @GithubUsername
 
 *
 
-To pick. Link to the actual commits - NOT the merge commits. This list needs
-to be in chronological order, first to cherry-pick on top:
+## Cherry-picks:
+
+Link to the actual commits, NOT merge commits. The commits need to appear
+in chronological order so that `git cherry-pick` will apply them correctly.
 
 *
 
