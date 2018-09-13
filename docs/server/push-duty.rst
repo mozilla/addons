@@ -138,15 +138,19 @@ Push to stage
 Our infrastructure automates pushing the tags to stage once the tags have
 been pushed up to the repository.
 
-The only required step is to check the tag has deployed by looking out for
-the automated push messages in the irc channel.
+The only required step is to check that the tag has deployed by looking out for the automated push messages in the irc channel.
 
-You can also check ``/__version__`` on a given service which shows the currently
+You can also check ``/__version__`` or ``/__frontend_version__`` on a given service which shows the currently
 deployed revision and tag e.g:
 
  * `Addons Server (stage) <https://addons.allizom.org/__version__>`_
  * `Addons Frontend (stage) <https://addons.allizom.org/__frontend_version__>`_
  * `Addons Frontend Disco Pane (stage) <https://discovery.addons.allizom.org/__version__>`_
+
+Frontend L10n
++++++++++++++
+
+After you tag the ``addons-frontend`` repository, please remind someone on that team to `extract and merge the L10n strings <https://github.com/mozilla/addons-frontend/blob/master/docs/i18n.md>`_.
 
 Before the push
 +++++++++++++++
@@ -157,8 +161,8 @@ someone to work on them.
 Push
 ----
 
-The tag is pushed to production by Jason, once approved by Krupa, on Thursdays.
-It is the responsibility of the push hero to follow-up with Krupa and Jason,
+The tag is pushed to production by ops (wezhou), once approved by QA (Krupa), on Thursdays.
+It is the responsibility of the push hero to follow-up with QA and ops,
 and be around during the push for any unexpected issues.
 
 Monitoring the push
@@ -185,7 +189,7 @@ https://github.com/mozilla/addons/blob/master/releases/2018/08/16.md
 
 You can use this handy template:
 
-.. literalinclude:: /server/push_etherpad.tpl
+.. literalinclude:: /server/push_notes.tpl
 
 After completing a push, send an email to the dev-addons mailing list saying
 that the push is done with any issues. Here's the template:

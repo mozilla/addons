@@ -1,11 +1,14 @@
 This week's push is done!
 
 Notes:
-    https://public.etherpad-mozilla.org/p/amo-YYYY.MM.DD
+    https://github.com/mozilla/addons/blob/master/releases/YYYY/MM/DD.md
 
 Issues:
     None
 
 Next Push:
     <push hero>
-    https://public.etherpad-mozilla.org/p/amo-YYYY.MM.DD
+    https://github.com/mozilla/addons/blob/master/releases/YYYY/MM/DD.md
+
+Per the tradition of keeping this email fun to read,
+[add something fun like music or a cat video or anything].
