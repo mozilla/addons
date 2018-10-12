@@ -10,10 +10,6 @@ Add-ons manager
 ~~~~~~~~~~~~~~~
 Handles installing, running and updating add-ons within the application (eg: Firefox). Also has pages like about:addons. In bugzilla - product: Toolkit, component: Add-ons Manager. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=Add-ons%20Manager&product=Toolkit>`__ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=Add-ons%20Manager>`__.
 
-Add-on SDK
-~~~~~~~~~~
-A library and SDK for building extensions. In bugzilla - product: Add-on SDK. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&product=Add-on%20SDK>`__ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Add-on%20SDK>`__. Documentation `on MDN <https://developer.mozilla.org/en-US/Add-ons/SDK>`__.
-
 WebExtensions
 ~~~~~~~~~~~~~
 An API for building add-ons that works with e10s and is compatible with Google Chrome. In bugzilla - product: Toolkit, component: WebExtensions. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=WebExtensions&product=Toolkit>`_ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=WebExtensions>`_. Documentation `on MDN <https://developer.mozilla.org/en-US/Add-ons/WebExtensions/>`_.
