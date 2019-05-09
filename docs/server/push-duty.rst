@@ -23,6 +23,7 @@ The following repositories are tagged:
 
     * `addons-server <https://github.com/mozilla/addons-server/>`_
     * `addons-frontend <https://github.com/mozilla/addons-frontend/>`_
+    * `addons-code-manager <https://github.com/mozilla/addons-code-manager/>`_
 
 Project Dependencies
 ++++++++++++++++++++
@@ -146,6 +147,7 @@ deployed revision and tag e.g:
  * `Addons Server (stage) <https://addons.allizom.org/__version__>`_
  * `Addons Frontend (stage) <https://addons.allizom.org/__frontend_version__>`_
  * `Addons Frontend Disco Pane (stage) <https://discovery.addons.allizom.org/__version__>`_
+ * `Addons Code Manager (stage) <https://code.addons.allizom.org/__version__>`_
 
 Frontend L10n
 +++++++++++++
@@ -185,7 +187,7 @@ Once complete
 
 Create a new github document for the *next push*, for example:
 
-https://github.com/mozilla/addons/blob/master/releases/2018/08/16.md
+https://github.com/mozilla/addons/blob/master/releases/2019/05/09.md
 
 You can use this handy template:
 
