@@ -21,6 +21,7 @@ in chronological order so that `git cherry-pick` will apply them correctly.
 
 * https://github.com/mozilla/addons-server/compare/YYYY.MM.DD...YYYY.MM.DD
 * https://github.com/mozilla/addons-frontend/compare/YYYY.MM.DD...YYYY.MM.DD
+* https://github.com/mozilla/addons-code-manager/compare/YYYY.MM.DD...YYYY.MM.DD
 
 
 ## Before we push:
