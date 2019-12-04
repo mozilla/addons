@@ -6,7 +6,6 @@ The pushing of the server rotates each week to another developer. Current rotati
 * cgrebs
 * willdurand
 * eviljeff
-* kumar
 * mat
 * muffinresearch
 * bsilverberg
