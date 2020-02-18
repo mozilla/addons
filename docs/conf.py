@@ -307,5 +307,9 @@ linkcheck_ignore = [
     'https://github.com/mozilla/addons-server-security',
     # TravisCI doesn't like CircleCI (or otherwise) so we get a 404
     'https://circleci.com/gh/mozilla*',
-    'https://app.datadoghq.com/*'
+    'https://app.datadoghq.com/*',
+    # Ignore this as the fragment id is non-existent.
+    'https://chat.mozilla.org/#/room/#amo:mozilla.org'
 ]
+
+
