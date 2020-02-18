@@ -137,7 +137,7 @@ Push to stage
 Our infrastructure automates pushing the tags to stage once the tags have
 been pushed up to the repository.
 
-The only required step is to check that the tag has deployed by looking out for the automated push messages in the irc channel.
+The only required step is to check that the tag has deployed by looking out for the automated push messages in the internal slack channel.
 
 You can also check ``/__version__`` or ``/__frontend_version__`` on a given service which shows the currently
 deployed revision and tag e.g:
@@ -196,8 +196,7 @@ that the push is done with any issues. Here's the template:
 
 .. literalinclude:: /server/push_email.tpl
 
-Set the topic of the `#amo` and `#remora` channels to include the new github doc link and
-the IRC nick of next week's push hero.
+Set the topic of the `#amo <https://chat.mozilla.org/#/room/#amo:mozilla.org>` Matrix channel and `#remora` slack channel to include the new github doc link and the relevant nickname of next week's push hero.
 
 Future Goals
 ------------
