@@ -196,7 +196,7 @@ that the push is done with any issues. Here's the template:
 
 .. literalinclude:: /server/push_email.tpl
 
-Set the topic of the `#amo <https://chat.mozilla.org/#/room/#amo:mozilla.org>` Matrix channel and `#remora` slack channel to include the new github doc link and the relevant nickname of next week's push hero.
+Set the topic of the `AMO Matrix channel <https://chat.mozilla.org/#/room/#amo:mozilla.org>`_ and `#remora` slack channel to include the new github doc link and the relevant nickname of next week's push hero.
 
 Future Goals
 ------------
