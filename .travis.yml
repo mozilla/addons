@@ -9,7 +9,7 @@ script:
   - cd docs && make clean html linkcheck SPHINXOPTS='-nW'
 notifications:
   slack:
-    if: branch = master
+    if: branch = main
     secure: P0fYDEfqULRPeenMlvVLqGWuozKf5TS9pclq3G+P0s+/K+we1QqisWPH37LXz/Aq8IsahM2JwD2PwE+Zkw3Xz2Abzx8KnWMlgRUscghYxehxC7qv0+AaQuPTtMgcnlm6ALz9QUjJ4VuO+5xJcNHJnBygFg9nJ/y0YIqU/2wpZiaF2dZSstrAVsTuyPoiY5gHQsod0i50hFj/EMkY+KIs/0+nA3k+HSrRF+S4S9eH39U0zt33Y6etOvUSsqRfNrGkdfTZMzmZEXBvm6KT5/kfxWn6cEnkwchS2n0BydCmeZAikk0k9XxEIZF3UeeK5Gol+j1zZe68CuWaq3lNKDY7BrhuwOumqEK9lQsuHZBm8Ti563hXlw25vGVjVMpuzPrkx4UG3jAtKgPdEDpyOig15YGHQcdGF375PwgPd1iBVAwwnaiBFhfq273WispRc+2iP0Gfb4okgU81DRLHhOm2jYlt6uU8RAQxm4Z1wPBBCl6D3w+QeP4oItrrZLVInN7vFK/6Xpr3r9qkQztm+plSLB+bB6Fu2Pg0rsIKAvsgeC1lY/evOxjHpF5ElAtcWjZyVIiEzMDiT4sfb6qs+ai4gsWtdAIweUDFmp09fc+aR0C7yhU4I02I+fB+ZIVX8G01Nxe8tRLKdyQCoW4pcntXEVQlR0icNJS5+cFw/sc8WNo=
     on_success: change
     on_failure: always

@@ -49,19 +49,19 @@ Security fixes for addons-server live on a separate private repository:
 To make merging easier, when making a pull request against this repository, the
 remote branch should not be published to one's fork but to the repository
 itself. Once the PR has been reviewed, it should *not* be merged right away.
-Instead, merging to master is part of push duty and happens right before
+Instead, merging to main is part of push duty and happens right before
 tagging::
 
-  $ git checkout master
+  $ git checkout main
   $ git pull
   $ git fetch security
   $ git merge security/<branch-name>
-  $ git diff upstream/master
-  $ git push upstream master
-  $ git push security master
+  $ git diff upstream/main
+  $ git push upstream main
+  $ git push security main
 
-.. note:: ``mozilla/addons-server-security`` ``master`` branch should never be
-  pushed to directly without pushing to ``mozilla/addons-server`` ``master``
+.. note:: ``mozilla/addons-server-security`` ``main`` branch should never be
+  pushed to directly without pushing to ``mozilla/addons-server`` ``main``
   first - the two should always stay in sync.
 
   This means the merge or edit buttons in github web UI must never be used in
@@ -86,9 +86,9 @@ Tags are of the format: ``YYYY.MM.DD``,
    built on `CircleCI`_ and is
    required to deploy to stage.
 
-It's usually the master branch that is tagged::
+It's usually the main branch that is tagged::
 
-    $ git checkout master
+    $ git checkout main
     $ git pull
     $ git tag 2015.09.10
     $ git push upstream 2015.09.10
@@ -100,7 +100,7 @@ It's usually the master branch that is tagged::
 Get a compare link from github to compare this tag to the last tag. Add that
 compare link to the etherpad so that people can clearly see what is pushing.
 
-If tagging the master branch can't be done (some feature is already on master,
+If tagging the main branch can't be done (some feature is already on main,
 but not ready for production), then the commits that need to be released
 should be cherry-picked
 
@@ -149,7 +149,7 @@ deployed revision and tag e.g:
 Frontend L10n
 +++++++++++++
 
-After you tag the ``addons-frontend`` repository, please `extract and merge the L10n strings <https://github.com/mozilla/addons-frontend/blob/master/docs/i18n.md>`_.
+After you tag the ``addons-frontend`` repository, please `extract and merge the L10n strings <https://github.com/mozilla/addons-frontend/blob/main/docs/i18n.md>`_.
 
 Before the push
 +++++++++++++++
@@ -185,7 +185,7 @@ Once complete
 
 Create a new github document for the *next push*, for example:
 
-https://github.com/mozilla/addons/blob/master/releases/2019/05/09.md
+https://github.com/mozilla/addons/blob/main/releases/2019/05/09.md
 
 You can use this handy template:
 
