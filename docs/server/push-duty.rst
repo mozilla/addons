@@ -149,7 +149,7 @@ deployed revision and tag e.g:
 Frontend L10n
 +++++++++++++
 
-After you tag the ``addons-frontend`` repository, please `extract and merge the L10n strings <https://github.com/mozilla/addons-frontend/blob/main/docs/i18n.md>`_.
+After you tag the ``addons-frontend`` repository, please `extract and merge the L10n strings <https://github.com/mozilla/addons-frontend/blob/master/docs/i18n.md>`_.
 
 Before the push
 +++++++++++++++
