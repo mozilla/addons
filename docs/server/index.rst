@@ -1,7 +1,7 @@
 Server
 ======
 
-About the `add-ons server <https://addons.mozilla.org/en-US/firefox/>`_.
+About the `add-ons server <https://addons.mozilla.org/>`_.
 
 Contents:
 
