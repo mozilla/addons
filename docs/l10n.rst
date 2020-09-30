@@ -169,5 +169,5 @@ E.g: ``https://addons-dev.allizom.org/en-US/firefox/`` becomes
 .. _`Pontoon`: https://pontoon.mozilla.org/
 .. _`addons-server on Pontoon`: https://pontoon.mozilla.org/projects/amo/info/
 .. _`addons-frontend on Pontoon`: https://pontoon.mozilla.org/projects/amo-frontend/info/
-.. _`new profile`: https://support.mozilla.org/en-US/kb/profile-manager-create-remove-switch-firefox-profiles
+.. _`new profile`: https://support.mozilla.org/kb/profile-manager-create-remove-switch-firefox-profiles
 

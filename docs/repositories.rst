@@ -8,11 +8,11 @@ Browser code is maintained in mozilla-central. This includes several areas relat
 
 Add-ons Manager
 ~~~~~~~~~~~~~~~
-Handles installing, running and updating add-ons within the application (eg: Firefox). Also has pages like about:addons. In bugzilla - product: Toolkit, component: Add-ons Manager. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=Add-ons%20Manager&product=Toolkit&list_id=15432463>`__ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=Add-ons%20Manager>`__.
+Handles installing, running and updating add-ons within the application (eg: Firefox). Also has pages like about:addons. In bugzilla - product: Toolkit, component: Add-ons Manager. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=Add-ons%20Manager&product=Toolkit>`__ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=Add-ons%20Manager>`__.
 
 WebExtensions
 ~~~~~~~~~~~~~
-An API for building add-ons that works with e10s and is compatible with Google Chrome. In bugzilla - product: Toolkit, component: WebExtensions. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=WebExtensions&product=Toolkit>`_ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=WebExtensions>`_. Documentation `on MDN <https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions>`_.
+An API for building add-ons that works with e10s and is compatible with Google Chrome. In bugzilla - product: Toolkit, component: WebExtensions. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=WebExtensions&product=Toolkit>`_ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=WebExtensions>`_. Documentation `on MDN <https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions>`_.
 
 GitHub
 ------
@@ -44,7 +44,7 @@ The dispensary collects and offers hashes of popular JavaScript libraries, mainl
 
 web-ext
 ~~~~~~~
-This is a command line tool to help build, run, and test `WebExtensions <https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions>`__. The `repository <https://github.com/mozilla/web-ext>`__ and `issue tracker <https://github.com/mozilla/web-ext/issues/>`__ is on GitHub. The `documentation <https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/>`__ and `command reference <https://extensionworkshop.com/documentation/develop/web-ext-command-reference>`__ is on Extension Workshop.
+This is a command line tool to help build, run, and test `WebExtensions <https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions>`__. The `repository <https://github.com/mozilla/web-ext>`__ and `issue tracker <https://github.com/mozilla/web-ext/issues/>`__ is on GitHub. The `documentation <https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/>`__ and `command reference <https://extensionworkshop.com/documentation/develop/web-ext-command-reference>`__ is on Extension Workshop.
 
 extension-workshop
 ~~~~~~~~~~~~~~~~~~
