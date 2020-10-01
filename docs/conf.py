@@ -312,6 +312,4 @@ linkcheck_ignore = [
     'https://chat.mozilla.org/#/room/#amo:mozilla.org',
     # Ignore about: pages
     r'about:.*',
-    # Ignore bugzilla buglist pages since they require cookies apparently
-    r'https://bugzilla\.mozilla\.org/buglist\.cgi\?.*',
 ]
