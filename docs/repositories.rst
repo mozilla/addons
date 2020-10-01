@@ -36,7 +36,7 @@ A web application to manage add-on source code, such as reviewing code for add-o
 
 addons-linter
 ~~~~~~~~~~~~~
-The linter is linting WebExtensions for `addons.mozilla.org <https://addons.mozilla.org/>`__ and `web-ext <https://github.com/mozilla/web-ext/>`__. The `repository <https://github.com/mozilla/addons-linter>`__, `issue tracker <https://github.com/mozilla/addons-linter/issues/>`__ and `documentation <https://mozilla.github.io/addons-linter/>`__ is on GitHub.
+The linter checks WebExtensions for common errors and potential problems. It is used on `addons.mozilla.org <https://addons.mozilla.org/>`__ and `web-ext <https://github.com/mozilla/web-ext/>`__. It can also be run in stand-alone mode. The `repository <https://github.com/mozilla/addons-linter>`__, `issue tracker <https://github.com/mozilla/addons-linter/issues/>`__ and `documentation <https://mozilla.github.io/addons-linter/>`__ is on GitHub.
 
 dispensary
 ~~~~~~~~~~
