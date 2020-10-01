@@ -6,13 +6,13 @@ mozilla-central
 
 Browser code is maintained in mozilla-central. This includes several areas related to add-ons. All of the following bug trackers are in Bugzilla:
 
-Add-ons manager
+Add-ons Manager
 ~~~~~~~~~~~~~~~
 Handles installing, running and updating add-ons within the application (eg: Firefox). Also has pages like about:addons. In bugzilla - product: Toolkit, component: Add-ons Manager. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=Add-ons%20Manager&product=Toolkit>`__ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=Add-ons%20Manager>`__.
 
 WebExtensions
 ~~~~~~~~~~~~~
-An API for building add-ons that works with e10s and is compatible with Google Chrome. In bugzilla - product: Toolkit, component: WebExtensions. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=WebExtensions&product=Toolkit>`_ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=WebExtensions>`_. Documentation `on MDN <https://developer.mozilla.org/en-US/Add-ons/WebExtensions/>`_.
+An API for building add-ons that works with e10s and is compatible with Google Chrome. In bugzilla - product: Toolkit, component: WebExtensions. `Existing bugs <https://bugzilla.mozilla.org/buglist.cgi?bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&component=WebExtensions&product=Toolkit>`_ or `file a new bug <https://bugzilla.mozilla.org/enter_bug.cgi?product=Toolkit&component=WebExtensions>`_. Documentation `on MDN <https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions>`_.
 
 GitHub
 ------
@@ -26,20 +26,26 @@ Bug tracker is in GitHub and can be used for almost anything add-ons related. `E
 
 addons-server
 ~~~~~~~~~~~~~
-The `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/addons-server>`_ is on GitHub. The preferred bug tracker is `github <https://GitHub.com/mozilla/addons-server/issues/>`__ although components do exist on bugzilla for legacy bugs. Documentation is `on readthedocs <https://addons-server.readthedocs.io>`__.
+The `addons.mozilla.org <https://addons.mozilla.org/>`__ website. The `repository <https://github.com/mozilla/addons-server>`__ and `issue tracker <https://github.com/mozilla/addons-server/issues/>`__ is on GitHub. Documentation is `on readthedocs <https://addons-server.readthedocs.io>`__.
 
 In the past this repository has been known as *remora*, *zamboni* or *olympia*.
 
-amo-validator
-~~~~~~~~~~~~~
-The legacy Python version of the validator for the `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/amo-validator>`__ is on GitHub. The preferred bug tracker is `GitHub <https://github.com/mozilla/amo-validator/issues/>`__ although components do exist on bugzilla for legacy bugs. Documentation is `on readthedocs <https://addons-server.readthedocs.io>`__.
+addons-code-manager
+~~~~~~~~~~~~~~~~~~~
+A web application to manage add-on source code, such as reviewing code for add-ons submitted to addons.mozilla.org. The `repository <https://github.com/mozilla/addons-code-manager>`__ and `issue tracker <https://github.com/mozilla/addons-code-manager/issues/>`__ is on GitHub.
 
 addons-linter
 ~~~~~~~~~~~~~
-The new JavaScript version of the validator for the `addons.mozilla.org <https://addons.mozilla.org>`__ website. The `repository <https://github.com/mozilla/addons-linter>`__ is on GitHub. The bug tracker is `GitHub <https://github.com/mozilla/addons-linter/issues/>`__. Documentation is `on readthedocs <https://addons-server.readthedocs.io>`__. See also `dispensary <https://github.com/mozilla/dispensary>`__.
+The linter checks WebExtensions for common errors and potential problems. It is used on `addons.mozilla.org <https://addons.mozilla.org/>`__ and `web-ext <https://github.com/mozilla/web-ext/>`__. It can also be run in stand-alone mode. The `repository <https://github.com/mozilla/addons-linter>`__, `issue tracker <https://github.com/mozilla/addons-linter/issues/>`__ and `documentation <https://mozilla.github.io/addons-linter/>`__ is on GitHub.
 
-jpm
-~~~
-Command line client for creating SDK add-ons. The `repository <https://github.com/mozilla-jetpack/jpm>`__ is on GitHub. The bug tracker is `GitHub <https://github.com/mozilla-jetpack/jpm/issues/>`__. Documentation is `on MDN <https://developer.mozilla.org/en-US/Add-ons/SDK/Tutorials/Getting_Started_%28jpm%29>`__. See also `jpm core <https://github.com/mozilla-jetpack/jpm-core>`__ and `jpm mobile <https://github.com/mozilla-jetpack/jpm-mobile>`__.
+dispensary
+~~~~~~~~~~
+The dispensary collects and offers hashes of popular JavaScript libraries, mainly for the Mozilla's `addons-linter <https://github.com/mozilla/addons-linter>`__. The `repository <https://github.com/mozilla/dispensary>`__ and `issue tracker <https://github.com/mozilla/dispensary/issues/>`__ is on GitHub.
 
-The following repository exists on GitHub, but should bugs and code should go into mozilla-central: `add-on SDK <https://github.com/mozilla/addon-sdk>`__.
+web-ext
+~~~~~~~
+This is a command line tool to help build, run, and test `WebExtensions <https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions>`__. The `repository <https://github.com/mozilla/web-ext>`__ and `issue tracker <https://github.com/mozilla/web-ext/issues/>`__ is on GitHub. The `documentation <https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/>`__ and `command reference <https://extensionworkshop.com/documentation/develop/web-ext-command-reference>`__ is on Extension Workshop.
+
+extension-workshop
+~~~~~~~~~~~~~~~~~~
+Extension Workshop is a launchpad for building Firefox extensions. It contains resources about development, publication and management of WebExtensions. The `repository <https://github.com/mozilla/extension-workshop>`__ and `issue tracker <https://github.com/mozilla/extension-workshop/issues/>`__ is on GitHub.

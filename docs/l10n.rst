@@ -24,8 +24,8 @@ written in Python using the Django Framework.
 Testing changes to addons-server localizations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The strings will be available on `dev <https://addons-dev.allizom.org>`_ or
-`stage <https://addons.allizom.org>`_ depending on when they were
+The strings will be available on `dev <https://addons-dev.allizom.org/>`_ or
+`stage <https://addons.allizom.org/>`_ depending on when they were
 committed see `When can I expect to see my strings land?`_ for details.
 
 The relevant hosts for addons-server are as follows:
@@ -163,11 +163,11 @@ E.g: ``https://addons-dev.allizom.org/en-US/firefox/`` becomes
 ``https://addons-dev.allizom.org/dbr/firefox/``.
 
 
-.. _`dev`: https://addons-dev.allizom.org
-.. _`stage`: https://addons.allizom.org
+.. _`dev`: https://addons-dev.allizom.org/
+.. _`stage`: https://addons.allizom.org/
 .. _`potools`: https://github.com/mozilla/potools/
 .. _`Pontoon`: https://pontoon.mozilla.org/
 .. _`addons-server on Pontoon`: https://pontoon.mozilla.org/projects/amo/info/
 .. _`addons-frontend on Pontoon`: https://pontoon.mozilla.org/projects/amo-frontend/info/
-.. _`new profile`: https://support.mozilla.org/kb/profile-manager-create-and-remove-firefox-profiles
+.. _`new profile`: https://support.mozilla.org/kb/profile-manager-create-remove-switch-firefox-profiles
 
