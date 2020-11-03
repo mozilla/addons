@@ -57,45 +57,6 @@ to be routed to the new frontend you either need:
 
 .. image:: images/view-mobile-site-link.png
 
-Discovery-Pane app
-++++++++++++++++++
-
-The addons-frontend repo is also home to the Discovery pane app (disco.po)
-which is the site containing curated addons available at about:addons
-(tools -> Add-ons -> Get Add-ons).
-
-Whilst this looks like it's part of firefox it's actually a webpage served
-from ``https://discovery.addons.mozilla.org``.
-
-To access the disco pane directly you'll need to use a full path. The URL
-used is defined in about:config as: ``extensions.webservice.discoverURL``.
-
-e.g: ``https://discovery.addons.mozilla.org/%LOCALE%/firefox/discovery/pane/%VERSION%/%OS%/%COMPATIBILITY_MODE%``
-
-The parts of the string wrapped with ``%`` are replaced so the actual URL
-might be something like: https://discovery.addons.mozilla.org/en-US/firefox/discovery/pane/57.0a1/Darwin/normal
-
-See `Advanced Configuration for testing addons-frontend strings`_ for further
-instructions on how to setup your browser to test this properly.
-
-Discovery Pane editorial content
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The content for the disco pane comes from the API so if you want to
-translate that you will need to look in addons-server.
-
-Testing Discovery Pane localizations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The strings will be available on `dev`_ or `stage`_ depending on when they
-were committed see `When can I expect to see my strings land?`_ for details.
-
-The hosts for the discovery pane are as follows:
-
-    * dev ``https://discovery.addons-dev.allizom.org``
-    * stage ``https://discovery.addons.allizom.org``
-    * prod ``https://discovery.addons.mozilla.org``
-
 Advanced Configuration for testing addons-frontend strings
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -114,10 +75,6 @@ need to additionally do the following:
     * To install an add-on, you will need to be able to install a signed
       add-on from dev or stage. Create the ``xpinstall.signatures.dev-root``
       pref in ``about:config`` as a Boolean and set it to ``true``.
-    * (Discovery Pane only) Go to about:config and change the host in
-      ``extensions.webservice.discoverURL`` to
-      ``https://discovery.addons-dev.allizom.org/`` for -dev
-      or ``https://discovery.addons.allizom.org/`` for stage.
     * If you see warnings when trying to install a theme or theme previews
       don't work go to ``about:preferences#security`` and add an exception
       for dev/stage (See the "Exceptions" button next to "Warn me when
