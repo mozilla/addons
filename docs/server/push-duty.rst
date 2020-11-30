@@ -190,11 +190,6 @@ You can use this handy template:
 
 .. literalinclude:: /server/push_notes.tpl
 
-After completing a push, send an email to the dev-addons mailing list saying
-that the push is done with any issues. Here's the template:
-
-.. literalinclude:: /server/push_email.tpl
-
 Set the topic of the `AMO Matrix channel <https://chat.mozilla.org/#/room/#amo:mozilla.org>`_ and `#remora` slack channel to include the new github doc link and the relevant nickname of next week's push hero.
 
 Future Goals
