@@ -26,6 +26,13 @@ references:
       paths:
         - "venv"
 
+  run_tests: &run_tests
+    run:
+      name: Run tests
+      command: |
+        . venv/bin/activate
+        cd docs && make clean html linkcheck SPHINXOPTS='-nW'
+
 jobs:
   test:
     <<: *defaults
@@ -34,10 +41,7 @@ jobs:
       - *restore_build_cache
       - *run_pip_install
       - *save_build_cache
-      - run:
-          command: |
-            . venv/bin/activate
-            cd docs && make clean html linkcheck SPHINXOPTS='-nW'
+      - *run_tests
 
 workflows:
   version: 2
