@@ -1,0 +1,46 @@
+version: 2.1
+
+references:
+  defaults: &defaults
+    working_directory: ~/addons
+    docker:
+      - image: circleci/python:3.8
+
+  restore_build_cache: &restore_build_cache
+    restore_cache:
+      keys:
+        - deps1-{{ .Branch }}-{{ checksum "requirements/docs.txt" }}
+
+  run_pip_install: &run_pip_install
+    run:
+      name: Install Python deps in a venv
+      command: |
+        python3 -m venv venv
+        . venv/bin/activate
+        pip install -r requirements/docs.txt
+
+  save_build_cache: &save_build_cache
+    save_cache:
+      keys:
+        - deps1-{{ .Branch }}-{{ checksum "requirements/docs.txt" }}
+      paths:
+        - "venv"
+
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - *restore_build_cache:
+      - *run_pip_install
+      - *save_build_cache:
+      - run:
+          command: |
+            . venv/bin/activate
+            cd docs && make clean html linkcheck SPHINXOPTS='-nW'
+
+workflows:
+  version: 2
+  default-workflow:
+    jobs:
+      - test

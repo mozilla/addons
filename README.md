@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/mozilla/addons.svg?style=svg)](https://circleci.com/gh/mozilla/addons)
+
 # Mozilla Add-ons
 
 This is the general root project for add-ons at Mozilla.
