@@ -21,8 +21,7 @@ references:
 
   save_build_cache: &save_build_cache
     save_cache:
-      keys:
-        - deps1-{{ .Branch }}-{{ checksum "requirements/docs.txt" }}
+      key: deps1-{{ .Branch }}-{{ checksum "requirements/docs.txt" }}
       paths:
         - "venv"
 
