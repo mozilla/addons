@@ -31,9 +31,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - *restore_build_cache:
+      - *restore_build_cache
       - *run_pip_install
-      - *save_build_cache:
+      - *save_build_cache
       - run:
           command: |
             . venv/bin/activate
