@@ -145,11 +145,14 @@ deployed revision and tag e.g:
  * `Addons Frontend (stage) <https://addons.allizom.org/__frontend_version__>`_
  * `Addons Code Manager (stage) <https://code.addons.allizom.org/__version__>`_
 
-Frontend L10n
-+++++++++++++
+Extract locales
++++++++++++++++
 
-After you tag the ``addons-frontend`` repository, please `extract and merge the L10n strings <https://github.com/mozilla/addons-frontend/blob/master/docs/i18n.md>`_.
+Once you are done pushing the tags to stage:
 
+ * Run the ``./bin/run-l10n-extraction`` command in ``addons-frontend`` repository (`documentation <https://github.com/mozilla/addons-frontend/blob/master/docs/i18n.md>`_).
+ * Run the ``./scripts/extract-l10n.sh`` command in ``addons-server`` repository.
+Because the `addons-server` is meant to be used inside the docker container, it doesn't have access to your `git` credentials, so you'll need to enter the container, run the script, exit the container and push the branch created by script. The `addons-frontend` one does that for you, but in both cases you'll need to open the pull request yourself.
 Before the push
 +++++++++++++++
 
