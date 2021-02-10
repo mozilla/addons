@@ -145,11 +145,14 @@ deployed revision and tag e.g:
  * `Addons Frontend (stage) <https://addons.allizom.org/__frontend_version__>`_
  * `Addons Code Manager (stage) <https://code.addons.allizom.org/__version__>`_
 
-Frontend L10n
-+++++++++++++
+Extract locales
++++++++++++++++
 
-After you tag the ``addons-frontend`` repository, please `extract and merge the L10n strings <https://github.com/mozilla/addons-frontend/blob/master/docs/i18n.md>`_.
+Once you are done pushing the tags to stage:
 
+ * Run the ``./bin/run-l10n-extraction`` command in ``addons-frontend`` repository (`documentation <https://github.com/mozilla/addons-frontend/blob/master/docs/i18n.md>`_).
+ * Run the ``./scripts/extract-l10n.sh`` command in ``addons-server`` repository.
+ 
 Before the push
 +++++++++++++++
 
