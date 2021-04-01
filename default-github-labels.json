@@ -1,0 +1,157 @@
+[
+  {
+    "name": "priority: mvp",
+    "color": "d93f0b",
+    "description": ""
+  },
+  {
+    "name": "priority: mvp-polish",
+    "color": "99ff99",
+    "description": ""
+  },
+  {
+    "name": "priority: blocks release",
+    "color": "e92332",
+    "description": ""
+  },
+  {
+    "name": "priority: p1",
+    "color": "ff0039",
+    "description": "Issues at this priority level should be fixed for the next release."
+  },
+  {
+    "name": "priority: p2",
+    "color": "d70022",
+    "description": "Issues at this level should be fixed within the next few releases."
+  },
+  {
+    "name": "priority: p3",
+    "color": "a4000f",
+    "description": "This priority level reflects our backlog."
+  },
+  {
+    "name": "priority: p4",
+    "color": "5a0002",
+    "description": "Lower priority backlog. These are potentially good candidates for contributions."
+  },
+  {
+    "name": "priority: p5",
+    "color": "3e0200",
+    "description": "Very low priority issues. Patches from contributors may be considered."
+  },
+  {
+    "name": "type: bug",
+    "color": "c01068",
+    "description": ""
+  },
+  {
+    "name": "type: papercut",
+    "color": "c01068",
+    "description": ""
+  },
+  {
+    "name": "type: question",
+    "color": "c01068",
+    "description": ""
+  },
+  {
+    "name": "type: regression",
+    "color": "c01068",
+    "description": ""
+  },
+  {
+    "name": "type: prod_bug",
+    "color": "c01068",
+    "description": "Label for bugs discovered in production, but reproducible also in -dev and stage."
+  },
+  {
+    "name": "qa: not needed",
+    "color": "fef1af",
+    "description": ""
+  },
+  {
+    "name": "qa: extra",
+    "color": "fef1af",
+    "description": ""
+  },
+  {
+    "name": "state: blocked by upstream",
+    "color": "ffa500",
+    "description": ""
+  },
+  {
+    "name": "state: blocked",
+    "color": "ffa500",
+    "description": ""
+  },
+  {
+    "name": "state: do not merge",
+    "color": "ffa500",
+    "description": ""
+  },
+  {
+    "name": "state: verified fixed",
+    "color": "5fbf36",
+    "description": ""
+  },
+  {
+    "name": "state: wontfix",
+    "color": "eeeeee",
+    "description": ""
+  },
+  {
+    "name": "needs: ux",
+    "color": "9924b0",
+    "description": ""
+  },
+  {
+    "name": "needs: product",
+    "color": "9924b0",
+    "description": ""
+  },
+  {
+    "name": "needs: ops",
+    "color": "9924b0",
+    "description": ""
+  },
+  {
+    "name": "needs: info",
+    "color": "9924b0",
+    "description": ""
+  },
+  {
+    "name": "needs: editorial",
+    "color": "9924b0",
+    "description": ""
+  },
+  {
+    "name": "neverstale",
+    "color": "ffa500",
+    "description": ""
+  },
+  {
+    "name": "contrib: assigned",
+    "color": "c9b4f9",
+    "description": ""
+  },
+  {
+    "name": "contrib: good first bug",
+    "color": "c9b4f9",
+    "description": ""
+  },
+  {
+    "name": "contrib: maybe good first bug",
+    "color": "c9b4f9",
+    "description": ""
+  },
+  {
+    "name": "contrib: welcome",
+    "color": "c9b4f9",
+    "description": ""
+  },
+  {
+    "name": "contrib: mentor assigned",
+    "color": "c9b4f9",
+    "description": ""
+  }
+]
