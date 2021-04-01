@@ -29,3 +29,10 @@ Other comments:
 
 * no need to add in - or _ between words, eg "pull-request-ready" vs "pull request ready"
 * you can be verbose, eg: "needs more qa" vs "qa+"
+
+.. note:: We maintain a JSON file with a list of common GitHub labels. If you want to add those
+   labels to a repository, you can use the following command (a personal access token with "write"
+   permission should be generated).
+
+    $ npx github-labels -t <token> -c ./default-github-labels.json
+    $ # You can pass `-f` to remove all existing labels before creating the new ones
