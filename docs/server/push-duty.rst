@@ -140,6 +140,10 @@ stage, add the suffix ``-stage`` to the tag name. For example::
     $ git tag 2022.02.10-stage
     $ git push upstream 2022.02.10-stage
 
+.. note:: When pushing to stage you **must** create a tag with the ``--stage``
+  suffix. If you create and push a tag without that suffix you will be
+  deploying to **production**.
+
 Push to stage
 +++++++++++++
 
