@@ -195,7 +195,7 @@ the ``--stage`` suffix. For example::
     $ git tag 2022.02.10
     $ git push upstream 2022.02.10
 
-You should manually verify Extension Workshop on prod after the push has completed.
+You should manually verify Extension Workshop on prod after the push has completed. Visit https://extensionworkshop.com and view any pages that have been changed since the last push to verify they exist and are rendering properly.
 
 Monitoring the push
 +++++++++++++++++++
