@@ -161,7 +161,7 @@ deployed revision and tag e.g:
 
 Note that for Extension Workshop, pushing a tag to ``upstream`` with a name including
 the ``-stage`` suffix, will automatically deploy the tag to stage. You should manually
-verify Extension Workshop on stage after the push has completed.
+verify Extension Workshop on stage after the push has completed. Visit https://extensionworkshop.allizom.org and view any pages that have been changed since the last push to verify they exist and are rendering properly.
 
 Extract locales
 +++++++++++++++
