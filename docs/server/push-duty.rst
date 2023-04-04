@@ -3,7 +3,6 @@ Push Duty
 
 The pushing of the server rotates each week to another developer. Current rotation is:
 
-* bsilverberg
 * eviljeff
 * mat
 
