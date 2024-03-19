@@ -1,0 +1,38 @@
+name: Task (addons-frontend)
+description: Filing a task (contributors only)
+title: "[Task]: "
+labels: ["type:feature", "needs:info", "repository:addons-frontend"]
+projects: []
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        A few sentences describing what the task aims to achieve. It can be a simple sentence or a story formatted paragraph.
+        Be concise and detailed. Avoid vague terms and include relevant links.
+      placeholder: |
+        As a <blank>, I want to <blank, so that I can <blank>
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: List of milestones or checkpoints that if met verify the task has been completed.
+      value: |
+        ```[tasklist]
+          ### Acceptance Criteria
+          - [ ] 
+          ```
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      description: Checks before submitting the issue
+      options:
+        -
+          label: If the issue is ready to work on, I have removed the "needs:info" label and added an assignee.
+          required: true
