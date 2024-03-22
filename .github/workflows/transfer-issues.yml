@@ -1,0 +1,82 @@
+name: Transfer issues
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: How many issues to transfer
+        default: "1"
+        required: true
+      from_name:
+        description: "the name of the mozilla/<from_name repository to transfer issues from"
+        required: true
+
+permissions: write-all
+
+env:
+  ALLOWED_REPOS: "addons-server,addons-frontend"
+
+concurrency:
+  group: transfer
+  cancel-in-progress: true
+
+jobs:
+  fetch_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: meta
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          if [[ ! "${{ env.ALLOWED_REPOS }}" =~ (^|,)"${{ inputs.from_name }}"(,|$) ]]; then
+            echo "Invalid from_name "${{ inputs.from_name }}". Exiting..."
+            exit 1
+          fi
+
+          echo "from_repo=${{ github.server_url }}/${{ github.repository_owner }}/${{ inputs.from_name }}" >> $GITHUB_OUTPUT
+          echo "to_repo=${{ github.server_url }}/${{ github.repository }}" >> $GITHUB_OUTPUT
+          echo "repo_label=repository:${{ inputs.from_name }}" >> $GITHUB_OUTPUT
+
+      - name: Transfer
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -x
+
+          gh auth status
+
+          gh label clone ${{ steps.meta.outputs.from_repo }} -R ${{ steps.meta.outputs.to_repo }} --force
+
+          gh label create ${{ steps.meta.outputs.repo_label }} -R ${{ steps.meta.outputs.to_repo }} --force
+
+          transfer_issue() {
+            original_issue_url=$1
+            from_repo=$2
+            to_repo=$3
+            repo_label=$4
+
+            echo "$original_issue_url" >> old-issues.txt
+
+            new_issue_url=$(gh issue transfer -R $from_repo "$original_issue_url" "$to_repo")
+
+            echo "$new_issue_url" >> new-issues.txt
+
+            echo "Transferred issue $original_issue_url to $new_issue_url"
+
+            gh issue -R $to_repo edit $new_issue_url --add-label $repo_label
+          }
+
+          export -f transfer_issue
+
+          echo "Transferring issues from \"${{ steps.meta.outputs.from_repo }}\" to \"${{ steps.meta.outputs.to_repo }}\""
+
+          gh issue list -R "${{ steps.meta.outputs.from_repo }}" -s all -L ${{ inputs.count}} --json url --search "sort:created-asc" --jq '.[] | .url'| xargs -P 4 -I % bash -c -e 'transfer_issue % '"${{ steps.meta.outputs.from_repo }}"' '"${{ steps.meta.outputs.to_repo }}"' '"${{ steps.meta.outputs.repo_label }}"''
+
+          cat old-issues.txt
+
+          cat new-issues.txt
