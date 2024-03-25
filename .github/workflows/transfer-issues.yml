@@ -20,6 +20,9 @@ on:
         description: How many issues to transfer
         default: "1"
         required: true
+      issue_number:
+        description: "the issue number to transfer. Overrides count if set."
+        required: false
       from_name:
         description: "the name of the mozilla/<from_name repository to transfer issues from"
         required: true
@@ -28,9 +31,6 @@ on:
         required: true
 
 permissions: write-all
-
-env:
-  ALLOWED_REPOS: "addons-server,addons-frontend"
 
 concurrency:
   group: transfer
@@ -44,77 +44,15 @@ jobs:
 
       - name: Transfer issues
         env:
+          ALLOWED_REPOS: "addons-server,addons-frontend"
           GH_TOKEN: ${{ secrets[format('{0}', inputs.secret_name)] }}
+          FROM_NAME: ${{ inputs.from_name }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          TO_NAME: ${{ github.event.repository.name }}
+          COUNT: ${{ inputs.count }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
         shell: bash
-        run: |
-          set -x
-
-          echo "token: $GH_TOKEN"
-          gh auth status
-          
-          from_name="${{ inputs.from_name }}"
-          repo_label="repository:$from_name"
-          allowed_repos="${{ env.ALLOWED_REPOS }}"
-          repository_owner="${{ github.repository_owner }}"
-          to_name="${{ github.event.repository.name }}"
-          count="${{ inputs.count }}"
-
-          if [[ ! "$allowed_repos" =~ (^|,)"$from_name"(,|$) ]]; then
-            echo "Invalid from_name "$from_name". Exiting..."
-            exit 1
-          fi
-
-          echo "Transferring issues from \"$repository_owner/$from_name\" to \"$repository_owner/$to_name\""
-
-          repository_id=$(gh repo view "$repository_owner/$to_name" --json id --jq '.id')
-
-          issues_query="""
-            query {
-              repository(owner: \"$repository_owner\", name: \"$from_name\") {
-                issues(first: $count, orderBy: {field: CREATED_AT, direction: ASC}) {
-                  nodes {
-                    id
-                  }
-                }
-              }
-            }
-          """
-
-          issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issues.nodes[].id')
-
-          transfer_mutation="mutation {"
-
-          new_issues_counter=1
-
-          while IFS= read -r issue_id; do
-            transfer_mutation+=" t${new_issues_counter}: transferIssue(input: { issueId: \"${issue_id}\", repositoryId: \"${repository_id}\", createLabelsIfMissing: true }) { issue { id url } }"
-            new_issues_counter=$((new_issues_counter+1))
-          done <<< "$issues"
-
-          transfer_mutation+=" }"
-
-          new_issues=$(gh api graphql -f query="$transfer_mutation" --jq '.data | keys[] as $k | {url: .[$k].issue.url, id: .[$k].issue.id}')
-
-          new_issue_ids=$(echo "$new_issues" | jq -r '.id')
-          
-          gh label create \"$repo_label\" -R "$repository_owner/$to_name" --force
-
-          label_id=$(gh api /repos/$repository_owner/$to_name/labels/$repo_label --jq '.node_id')
-
-          label_mutation="mutation {"
-
-          label_counter=1
-
-          while IFS= read -r id; do
-            label_mutation+=" l${label_counter}: updateIssue(input: {id: \"$id\", labelIds: [\"$label_id\"]}) { __typename }"
-            label_counter=$((label_counter+1))
-          done <<< "$new_issue_ids"
-
-          label_mutation+=" }"
-
-          gh api graphql -f query="$label_mutation"
-
-          echo "$new_issues" | jq -r '.url'
+        run: ./scripts/transfer-issues.sh
 
       - name: Delete secret
         if: always()
@@ -126,4 +64,3 @@ jobs:
           if gh secret list --json name --jq '.[] | .name' | grep -q "${{ inputs.secret_name }}"; then
             gh secret delete ${{ inputs.secret_name }}
           fi
-          
