@@ -4,6 +4,8 @@ name: Transfer issues
 #
 # 1. Create a personal access token (Classic) with the `repo` and `read:org` scopes.
 #
+# URL: https://github.com/settings/tokens/new?description=transfer-issues-token&scopes=repo,read:org
+#
 # 2. Authorize the token for use with [SAML](https://github.com/latest/authentication/authenticating-with-saml-single-sign-on/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) on the `mozilla` org.
 #
 # 3. Create a secret in the repository with whatever name you want, and paste the token as the value.
