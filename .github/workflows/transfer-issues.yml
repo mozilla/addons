@@ -1,11 +1,18 @@
 name: Transfer issues
 
-# To run this action.
-# 1. Create a personal access token (Classic) with the `repo` and `read:org` scopes.defaults:
-# 2. Create a secret in the repository with whatever name you want, and paste the token as the value.
-# 3. Run the action with the secret name as the `secret_name` input.
+# To run this action. You need to do the following:
 #
-# Ex: gh secret set MY_TOKEN --body "<token_value>" && gh workflow run 90730614 --field count="10" --field from_name="addons-server" --field secret_name="MY_TOKEN"
+# 1. Create a personal access token (Classic) with the `repo` and `read:org` scopes.
+#
+# 2. Authorize the token for use with [SAML](https://github.com/latest/authentication/authenticating-with-saml-single-sign-on/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) on the `mozilla` org.
+#
+# 3. Create a secret in the repository with whatever name you want, and paste the token as the value.
+#
+# ex: $ gh secret set <secret-name> --body "<token_value>
+#
+# 4. Run the action with the secret name as the `secret_name` input.
+#
+# ex: `gh secret set <secret-name> --body "<token_value>" && gh workflow run 90730614 --field count="10" --field from_name="addons-server" --field secret_name="<secret-name>"`
 #
 # Note: you need to paste the PAT in body, so make sure to keep track of the value before saving it.
 # Also verify the workflow ID is correct. You can run without arguments and select interactively.
@@ -47,7 +54,7 @@ jobs:
           ALLOWED_REPOS: "addons-server,addons-frontend"
           GH_TOKEN: ${{ secrets[format('{0}', inputs.secret_name)] }}
           FROM_NAME: ${{ inputs.from_name }}
-          REPO_OWNER: ${{ github.repository_owner }}
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
           TO_NAME: ${{ github.event.repository.name }}
           COUNT: ${{ inputs.count }}
           ISSUE_NUMBER: ${{ inputs.issue_number }}
