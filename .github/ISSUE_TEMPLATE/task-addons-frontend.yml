@@ -34,5 +34,5 @@ body:
       description: Checks before submitting the issue
       options:
         -
-          label: If the issue is ready to work on, I have removed the "needs:info" label and added an assignee.
+          label: If the issue is ready to work on, I have removed the "needs:info" label.
           required: true
