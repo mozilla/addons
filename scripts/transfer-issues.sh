@@ -9,24 +9,24 @@ set -u
 
 # Required environment variables
 # GITHUB_TOKEN: GitHub token with repo scope
-# REPOSITORY_OWNER: GitHub repository owner
 # FROM_NAME: Repository name to transfer issues from
-# TO_NAME: Repository name to transfer issues to
-# ALLOWED_REPOS: Comma-separated list of allowed repositories
 
 # Optional environment variables
 # ISSUE_NUMBER: Issue number to transfer (will nullify COUNT)
 # COUNT: Number of issues to transfer
 
+REPOSITORY_OWNER="mozilla"
+TO_NAME="addons"
+ALLOWED_REPOS="addons-server,addons-frontend"
 FROM_REPO="$REPOSITORY_OWNER/$FROM_NAME"
 TO_REPO="$REPOSITORY_OWNER/$TO_NAME"
 
 echo """
-REPOSITORY_OWNER: $REPOSITORY_OWNER
 FROM_NAME: $FROM_NAME
+
+REPOSITORY_OWNER: $REPOSITORY_OWNER
 TO_NAME: $TO_NAME
 ALLOWED_REPOS: $ALLOWED_REPOS
-
 FROM_REPO: $FROM_REPO
 TO_REPO: $TO_REPO
 
@@ -114,7 +114,7 @@ label_mutation="mutation {"
 label_counter=1
 
 while IFS= read -r id; do
-  label_mutation+=" l${label_counter}: updateIssue(input: {id: \"$id\", labelIds: [\"$label_id\"]}) { __typename }"
+  label_mutation+=" l${label_counter}: addLabelsToLabelable(input: {labelableId: \"$id\", labelIds: [\"$label_id\"]}) { __typename }"
   label_counter=$((label_counter+1))
 done <<< $(echo "$new_issues" | jq -r '.id')
 
