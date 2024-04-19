@@ -121,11 +121,17 @@ As of April 2024, Extension Workshop only has two environments:
 * `stage <https://extensionworkshop.allizom.org>`_ - auto-deployed on every commit pushed to the main branch
 * `prod <https://extensionworkshop.com>`_ - deployed with a tag (``YYYY.MM.DD``)
 
-Creating and pushing a git tag on the Extension Workshop repository will
-deploy it to production. You should manually verify the site on prod after
-the push has been completed. Visit https://extensionworkshop.com and
-view any pages that have been changed since the last push to verify they
-exist and are rendering properly.
+You should manually sense-check the stage environment is currently okay
+before tagging, and then creating and pushing a git tag to the Extension
+Workshop repository will deploy it to production. You should manually
+verify the site on prod after the push has been completed. Visit
+https://extensionworkshop.com and view any pages that have been changed
+since the last push to verify they exist and are rendering properly.
+
+    $ git checkout master
+    $ git pull
+    $ git tag 2024.04.18
+    $ git push upstream 2024.04.18
 
 Push to stage
 +++++++++++++
