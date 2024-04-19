@@ -20,6 +20,10 @@ The following repositories are tagged:
     * `addons-server <https://github.com/mozilla/addons-server/>`_
     * `addons-frontend <https://github.com/mozilla/addons-frontend/>`_
     * `addons-code-manager <https://github.com/mozilla/addons-code-manager/>`_
+
+The following repositories are immediately deployed to production when
+they are tagged. As such, one can update these projects at any time:
+
     * `extension-workshop <https://github.com/mozilla/extension-workshop/>`_
 
 Project Dependencies
@@ -112,17 +116,22 @@ Then update the push doc with the new comparison link for the updated tag.
 Extension Workshop
 __________________
 
-The tag naming scheme for extension-workshop is a bit different. When tagging for
-stage, add the suffix ``-stage`` to the tag name. For example::
+As of April 2024, Extension Workshop only has two environments:
+
+* `stage <https://extensionworkshop.allizom.org>`_ - auto-deployed on every commit pushed to the main branch
+* `prod <https://extensionworkshop.com>`_ - deployed with a tag (``YYYY.MM.DD``)
+
+You should manually sense-check the stage environment is currently okay
+before tagging, and then creating and pushing a git tag to the Extension
+Workshop repository will deploy it to production. You should manually
+verify the site on prod after the push has been completed. Visit
+https://extensionworkshop.com and view any pages that have been changed
+since the last push to verify they exist and are rendering properly.
 
     $ git checkout master
     $ git pull
-    $ git tag 2022.02.10-stage
-    $ git push upstream 2022.02.10-stage
-
-.. note:: When pushing to stage you **must** create a tag with the ``-stage``
-  suffix. If you create and push a tag without that suffix you will be
-  deploying to **production**.
+    $ git tag 2024.04.18
+    $ git push upstream 2024.04.18
 
 Push to stage
 +++++++++++++
@@ -138,10 +147,6 @@ deployed revision and tag e.g:
  * `Addons Server (stage) <https://addons.allizom.org/__version__>`_
  * `Addons Frontend (stage) <https://addons.allizom.org/__frontend_version__>`_
  * `Addons Code Manager (stage) <https://code.addons.allizom.org/__version__>`_
-
-Note that for Extension Workshop, pushing a tag to ``upstream`` with a name including
-the ``-stage`` suffix, will automatically deploy the tag to stage. You should manually
-verify Extension Workshop on stage after the push has completed. Visit https://extensionworkshop.allizom.org and view any pages that have been changed since the last push to verify they exist and are rendering properly.
 
 Extract locales
 +++++++++++++++
@@ -164,18 +169,6 @@ Push
 The tag is pushed to production by ops (wezhou), once approved by QA (Krupa), on Thursdays.
 It is the responsibility of the push hero to follow-up with QA and ops,
 and be around during the push for any unexpected issues.
-
-Extension Workshop
-++++++++++++++++++
-
-We push to extension-workshop on prod manually by creating a pushing a tag without
-the ``--stage`` suffix. For example::
-
-    $ git checkout 2022.02.10-stage
-    $ git tag 2022.02.10
-    $ git push upstream 2022.02.10
-
-You should manually verify Extension Workshop on prod after the push has completed. Visit https://extensionworkshop.com and view any pages that have been changed since the last push to verify they exist and are rendering properly.
 
 Monitoring the push
 +++++++++++++++++++
