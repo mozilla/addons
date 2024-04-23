@@ -53,11 +53,10 @@ jobs:
 
       - name: Transfer issues
         env:
-          ALLOWED_REPOS: "addons-server,addons-frontend"
+          # Required inputs
           GH_TOKEN: ${{ secrets[format('{0}', inputs.secret_name)] }}
           FROM_NAME: ${{ inputs.from_name }}
-          REPOSITORY_OWNER: ${{ github.repository_owner }}
-          TO_NAME: ${{ github.event.repository.name }}
+          # One or the other is required
           COUNT: ${{ inputs.count }}
           ISSUE_NUMBER: ${{ inputs.issue_number }}
         shell: bash
