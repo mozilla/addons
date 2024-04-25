@@ -38,6 +38,10 @@ on:
       secret_name:
         description: "the name of the secret containing the PAT for the repository to transfer issues to"
         required: true
+      states:
+        description: "which states to include 1) [OPEN] 2) [OPEN, CLOSED]"
+        required: true
+        default: "[OPEN]"
 
 permissions: write-all
 
