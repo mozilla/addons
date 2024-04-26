@@ -1,8 +1,7 @@
 #!/bin/bash
 
-set -x
-
 COUNT=${COUNT:-1}
+STATES=${STATES:-"[OPEN, CLOSED]"}
 ISSUE_NUMBER=${ISSUE_NUMBER:-}
 
 set -u
@@ -32,6 +31,7 @@ TO_REPO: $TO_REPO
 
 ISSUE_NUMBER: $ISSUE_NUMBER
 COUNT: $COUNT
+STATES: $STATES
 """
 
 auth_status=$(gh auth status 2>&1)
@@ -66,7 +66,7 @@ function get_multiple_issues() {
   local issues_query="""
     query {
       repository(owner: \"$REPOSITORY_OWNER\", name: \"$FROM_NAME\") {
-        issues(first: $COUNT, orderBy: {field: CREATED_AT, direction: ASC}) {
+        issues(first: $COUNT, states: $STATES, orderBy: {field: CREATED_AT, direction: ASC}) {
           nodes {
             id
           }
