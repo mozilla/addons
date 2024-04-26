@@ -14,6 +14,9 @@ set -u
 # ISSUE_NUMBER: Issue number to transfer (will nullify COUNT)
 # COUNT: Number of issues to transfer
 
+# The label ID for https://github.com/mozilla/addons/labels/migration%3A2024
+MIGRATION_LABEL_ID="LA_kwDOAn4H8M8AAAABmbq8hA"
+
 REPOSITORY_OWNER="mozilla"
 TO_NAME="addons"
 ALLOWED_REPOS="addons-server,addons-frontend"
@@ -118,7 +121,7 @@ label_mutation="mutation {"
 label_counter=1
 
 while IFS= read -r id; do
-  label_mutation+=" l${label_counter}: addLabelsToLabelable(input: {labelableId: \"$id\", labelIds: [\"$label_id\"]}) { __typename }"
+  label_mutation+=" l${label_counter}: addLabelsToLabelable(input: {labelableId: \"$id\", labelIds: [\"$label_id\", \"$MIGRATION_LABEL_ID\"]}) { __typename }"
   label_counter=$((label_counter+1))
 done <<< $(echo "$new_issues" | jq -r '.id')
 
