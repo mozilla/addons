@@ -4,7 +4,7 @@ COUNT=${COUNT:-1}
 STATES=${STATES:-"[OPEN, CLOSED]"}
 ISSUE_NUMBER=${ISSUE_NUMBER:-}
 
-set -xu
+set -xue
 
 # Required environment variables
 # GITHUB_TOKEN: GitHub token with repo scope
@@ -55,12 +55,18 @@ function get_single_issue() {
       repository(owner: \"$REPOSITORY_OWNER\", name: \"$FROM_NAME\") {
         issue(number: $ISSUE_NUMBER) {
           id
+          body
         }
       }
     }
   """
 
-  local issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issue.id')
+  local issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issue')
+
+  if [[ "$issues" == *"errors"* ]]; then
+    echo "Error: $issues"
+    exit 1
+  fi
 
   echo "$issues"
 }
@@ -72,13 +78,19 @@ function get_multiple_issues() {
         issues(first: $COUNT, states: $STATES, orderBy: {field: CREATED_AT, direction: ASC}) {
           nodes {
             id
+            body
           }
         }
       }
     }
   """
 
-  local issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issues.nodes[].id')
+  local issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issues.nodes[]')
+
+  if [[ "$issues" == *"errors"* ]]; then
+    echo "Error: $issues"
+    exit 1
+  fi
 
   echo "$issues"
 }
@@ -91,22 +103,41 @@ else
   issues=$(get_multiple_issues)
 fi
 
-if [[ $(echo $issues | jq '.data.repository') == "null" ]]; then
-  exit 1
-fi
-
 transfer_mutation="mutation {"
+comment_mutation="mutation {"
 
 new_issues_counter=1
+comment_counter=1
 
 repository_id=$(gh repo view "$TO_REPO" --json id --jq '.id')
 
-while IFS= read -r issue_id; do
+while IFS= read -r issue; do
+  issue_id=$(echo "$issue" | jq -r '.id')
+
   transfer_mutation+=" t${new_issues_counter}: transferIssue(input: { issueId: \"${issue_id}\", repositoryId: \"${repository_id}\", createLabelsIfMissing: true }) { issue { id url } }"
   new_issues_counter=$((new_issues_counter+1))
+
+  jira_link=$(echo $issue \
+    | jq -r '.body' \
+    | awk -F "┆Issue is synchronized with this" '{if (NF>1) {print $2} else {print ""}}' \
+    | grep -o 'https://[^ )]*'
+  )
+
+  # if jira_link is present, add to the mutation
+  if [ -n "$jira_link" ]; then
+    comment_body="Old Jira Ticket: $jira_link"
+    comment_mutation+=" t${comment_counter}: addComment(input: { subjectId: \"${issue_id}\", body: \"${comment_body}\" }) { __typename }"
+    comment_counter=$((comment_counter+1))
+  fi
+
 done <<< "$issues"
 
 transfer_mutation+=" }"
+comment_mutation+=" }"
+
+if [[ "$comment_counter" -gt 1 ]]; then
+  gh api graphql -f query="$comment_mutation"
+fi
 
 new_issues=$(gh api graphql -f query="$transfer_mutation" --jq '.data | keys[] as $k | {url: .[$k].issue.url, id: .[$k].issue.id}')
 
