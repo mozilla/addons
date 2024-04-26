@@ -4,7 +4,7 @@ COUNT=${COUNT:-1}
 STATES=${STATES:-"[OPEN, CLOSED]"}
 ISSUE_NUMBER=${ISSUE_NUMBER:-}
 
-set -u
+set -xu
 
 # Required environment variables
 # GITHUB_TOKEN: GitHub token with repo scope
@@ -112,7 +112,7 @@ new_issues=$(gh api graphql -f query="$transfer_mutation" --jq '.data | keys[] a
 
 repo_label="repository:$FROM_NAME"
 
-gh label create \"$repo_label\" -R "$TO_REPO" --force
+gh label create $repo_label -R "$TO_REPO" --force
 
 label_id=$(gh api /repos/$TO_REPO/labels/$repo_label --jq '.node_id')
 
