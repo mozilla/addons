@@ -88,6 +88,10 @@ else
   issues=$(get_multiple_issues)
 fi
 
+if [[ $(echo $issues | jq '.data.repository') == "null" ]]; then
+  exit 1
+fi
+
 transfer_mutation="mutation {"
 
 new_issues_counter=1
