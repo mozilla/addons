@@ -120,7 +120,7 @@ while IFS= read -r issue; do
   jira_link=$(echo $issue \
     | jq -r '.body' \
     | awk -F "┆Issue is synchronized with this" '{if (NF>1) {print $2} else {print ""}}' \
-    | grep -o 'https://[^ )]*'
+    | grep -o 'https://[^ )]*' || echo ''
   )
 
   # if jira_link is present, add to the mutation
