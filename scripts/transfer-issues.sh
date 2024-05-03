@@ -16,6 +16,7 @@ set -xue
 
 # The label ID for https://github.com/mozilla/addons/labels/migration%3A2024
 MIGRATION_LABEL_ID="LA_kwDOAn4H8M8AAAABmbq8hA"
+MIGRATION_NO_JIRA_ID="LA_kwDOAPqAY88AAAABm5JiFA"
 
 REPOSITORY_OWNER="mozilla"
 TO_NAME="addons"
@@ -127,8 +128,10 @@ while IFS= read -r issue; do
   if [ -n "$jira_link" ]; then
     comment_body="Old Jira Ticket: $jira_link"
     comment_mutation+=" t${comment_counter}: addComment(input: { subjectId: \"${issue_id}\", body: \"${comment_body}\" }) { __typename }"
-    comment_counter=$((comment_counter+1))
+  else
+    comment_mutation+=" t${comment_counter}: addLabelsToLabelable(input: {labelableId: \"$issue_id\", labelIds: [\"$MIGRATION_NO_JIRA_ID\"]}) { __typename }"
   fi
+  comment_counter=$((comment_counter+1))
 
 done <<< "$issues"
 
