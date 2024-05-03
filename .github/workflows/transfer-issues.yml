@@ -63,6 +63,8 @@ jobs:
           # One or the other is required
           COUNT: ${{ inputs.count }}
           ISSUE_NUMBER: ${{ inputs.issue_number }}
+          # Optional input
+          STATES: ${{ inputs.states }}
         shell: bash
         run: ./scripts/transfer-issues.sh
 
