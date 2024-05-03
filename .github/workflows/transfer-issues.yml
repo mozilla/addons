@@ -47,7 +47,7 @@ permissions: write-all
 
 concurrency:
   group: transfer
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   fetch_issues:

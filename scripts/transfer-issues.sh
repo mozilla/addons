@@ -16,6 +16,7 @@ set -xue
 
 # The label ID for https://github.com/mozilla/addons/labels/migration%3A2024
 MIGRATION_LABEL_ID="LA_kwDOAn4H8M8AAAABmbq8hA"
+MIGRATION_NO_JIRA_ID="LA_kwDOAPqAY88AAAABm5JiFA"
 
 REPOSITORY_OWNER="mozilla"
 TO_NAME="addons"
@@ -49,59 +50,59 @@ if [[ ! "$ALLOWED_REPOS" =~ (^|,)"$FROM_NAME"(,|$) ]]; then
   exit 1
 fi
 
-function get_single_issue() {
-  local issues_query="""
+rate_limit=$(gh api /rate_limit)
+echo "rate_limit: $rate_limit"
+graphql_remaining=$(echo $rate_limit | jq -r '.resources.graphql.remaining')
+core_remaining=$(echo $rate_limit | jq -r '.resources.core.remaining')
+rate_limit_remaining=$(echo $rate_limit | jq -r '.rate.remaining')
+
+if [[ "$graphql_remaining" -eq 0 || "$core_remaining" -eq 0 || "$rate_limit_remaining" -eq 0 ]]; then
+  echo "Rate limit exceeded. Exiting..."
+  exit 1
+fi
+
+if [[ -n "$ISSUE_NUMBER" ]]; then
+  echo "Transferring issue $ISSUE_NUMBER from \"$FROM_REPO\" to \"$TO_REPO\""
+  issues_query="""
     query {
       repository(owner: \"$REPOSITORY_OWNER\", name: \"$FROM_NAME\") {
         issue(number: $ISSUE_NUMBER) {
           id
           body
+          url
         }
       }
     }
   """
 
-  local issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issue')
+  issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issue')
+else
+  echo "Transferring $COUNT issues from \"$FROM_REPO\" to \"$TO_REPO\""
 
-  if [[ "$issues" == *"errors"* ]]; then
-    echo "Error: $issues"
-    exit 1
-  fi
-
-  echo "$issues"
-}
-
-function get_multiple_issues() {
-  local issues_query="""
+  issues_query="""
     query {
       repository(owner: \"$REPOSITORY_OWNER\", name: \"$FROM_NAME\") {
         issues(first: $COUNT, states: $STATES, orderBy: {field: CREATED_AT, direction: ASC}) {
           nodes {
             id
             body
+            url
           }
         }
       }
     }
   """
 
-  local issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issues.nodes[]')
-
-  if [[ "$issues" == *"errors"* ]]; then
-    echo "Error: $issues"
-    exit 1
-  fi
-
-  echo "$issues"
-}
-
-if [[ -n "$ISSUE_NUMBER" ]]; then
-  echo "Transferring issue $ISSUE_NUMBER from \"$FROM_REPO\" to \"$TO_REPO\""
-  issues=$(get_single_issue)
-else
-  echo "Transferring $COUNT issues from \"$FROM_REPO\" to \"$TO_REPO\""
-  issues=$(get_multiple_issues)
+  issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issues.nodes[]')
 fi
+
+if [[ -z "$issues" ]]; then
+  echo "No issues found. Exiting..."
+  exit 1
+fi
+
+# echo each issue .url property
+echo "$issues" | jq -r '.url'
 
 transfer_mutation="mutation {"
 comment_mutation="mutation {"
@@ -127,8 +128,10 @@ while IFS= read -r issue; do
   if [ -n "$jira_link" ]; then
     comment_body="Old Jira Ticket: $jira_link"
     comment_mutation+=" t${comment_counter}: addComment(input: { subjectId: \"${issue_id}\", body: \"${comment_body}\" }) { __typename }"
-    comment_counter=$((comment_counter+1))
+  else
+    comment_mutation+=" t${comment_counter}: addLabelsToLabelable(input: {labelableId: \"$issue_id\", labelIds: [\"$MIGRATION_NO_JIRA_ID\"]}) { __typename }"
   fi
+  comment_counter=$((comment_counter+1))
 
 done <<< "$issues"
 
@@ -151,10 +154,11 @@ label_mutation="mutation {"
 
 label_counter=1
 
-while IFS= read -r id; do
+while IFS= read -r issue; do
+  id=$(echo "$issue" | jq -r '.id')
   label_mutation+=" l${label_counter}: addLabelsToLabelable(input: {labelableId: \"$id\", labelIds: [\"$label_id\", \"$MIGRATION_LABEL_ID\"]}) { __typename }"
   label_counter=$((label_counter+1))
-done <<< $(echo "$new_issues" | jq -r '.id')
+done <<< "$new_issues"
 
 label_mutation+=" }"
 
