@@ -49,8 +49,9 @@ if [[ ! "$ALLOWED_REPOS" =~ (^|,)"$FROM_NAME"(,|$) ]]; then
   exit 1
 fi
 
-function get_single_issue() {
-  local issues_query="""
+if [[ -n "$ISSUE_NUMBER" ]]; then
+  echo "Transferring issue $ISSUE_NUMBER from \"$FROM_REPO\" to \"$TO_REPO\""
+  issues_query="""
     query {
       repository(owner: \"$REPOSITORY_OWNER\", name: \"$FROM_NAME\") {
         issue(number: $ISSUE_NUMBER) {
@@ -61,18 +62,11 @@ function get_single_issue() {
     }
   """
 
-  local issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issue')
+  issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issue')
+else
+  echo "Transferring $COUNT issues from \"$FROM_REPO\" to \"$TO_REPO\""
 
-  if [[ "$issues" == *"errors"* ]]; then
-    echo "Error: $issues"
-    exit 1
-  fi
-
-  echo "$issues"
-}
-
-function get_multiple_issues() {
-  local issues_query="""
+  issues_query="""
     query {
       repository(owner: \"$REPOSITORY_OWNER\", name: \"$FROM_NAME\") {
         issues(first: $COUNT, states: $STATES, orderBy: {field: CREATED_AT, direction: ASC}) {
@@ -85,22 +79,7 @@ function get_multiple_issues() {
     }
   """
 
-  local issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issues.nodes[]')
-
-  if [[ "$issues" == *"errors"* ]]; then
-    echo "Error: $issues"
-    exit 1
-  fi
-
-  echo "$issues"
-}
-
-if [[ -n "$ISSUE_NUMBER" ]]; then
-  echo "Transferring issue $ISSUE_NUMBER from \"$FROM_REPO\" to \"$TO_REPO\""
-  issues=$(get_single_issue)
-else
-  echo "Transferring $COUNT issues from \"$FROM_REPO\" to \"$TO_REPO\""
-  issues=$(get_multiple_issues)
+  issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issues.nodes[]')
 fi
 
 transfer_mutation="mutation {"
@@ -151,10 +130,11 @@ label_mutation="mutation {"
 
 label_counter=1
 
-while IFS= read -r id; do
+while IFS= read -r issue; do
+  id=$(echo "$issue" | jq -r '.id')
   label_mutation+=" l${label_counter}: addLabelsToLabelable(input: {labelableId: \"$id\", labelIds: [\"$label_id\", \"$MIGRATION_LABEL_ID\"]}) { __typename }"
   label_counter=$((label_counter+1))
-done <<< $(echo "$new_issues" | jq -r '.id')
+done <<< "$new_issues"
 
 label_mutation+=" }"
 
