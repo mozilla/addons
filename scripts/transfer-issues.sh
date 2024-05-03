@@ -49,6 +49,17 @@ if [[ ! "$ALLOWED_REPOS" =~ (^|,)"$FROM_NAME"(,|$) ]]; then
   exit 1
 fi
 
+rate_limit=$(gh api /rate_limit)
+echo "rate_limit: $rate_limit"
+graphql_remaining=$(echo $rate_limit | jq -r '.resources.graphql.remaining')
+core_remaining=$(echo $rate_limit | jq -r '.resources.core.remaining')
+rate_limit_remaining=$(echo $rate_limit | jq -r '.rate.remaining')
+
+if [[ "$graphql_remaining" -eq 0 || "$core_remaining" -eq 0 || "$rate_limit_remaining" -eq 0 ]]; then
+  echo "Rate limit exceeded. Exiting..."
+  exit 1
+fi
+
 if [[ -n "$ISSUE_NUMBER" ]]; then
   echo "Transferring issue $ISSUE_NUMBER from \"$FROM_REPO\" to \"$TO_REPO\""
   issues_query="""
