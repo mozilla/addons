@@ -57,6 +57,7 @@ if [[ -n "$ISSUE_NUMBER" ]]; then
         issue(number: $ISSUE_NUMBER) {
           id
           body
+          url
         }
       }
     }
@@ -73,6 +74,7 @@ else
           nodes {
             id
             body
+            url
           }
         }
       }
@@ -81,6 +83,14 @@ else
 
   issues=$(gh api graphql -f query="$issues_query" --jq '.data.repository.issues.nodes[]')
 fi
+
+if [[ -z "$issues" ]]; then
+  echo "No issues found. Exiting..."
+  exit 1
+fi
+
+# echo each issue .url property
+echo "$issues" | jq -r '.url'
 
 transfer_mutation="mutation {"
 comment_mutation="mutation {"
