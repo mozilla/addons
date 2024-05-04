@@ -46,7 +46,7 @@ on:
 permissions: write-all
 
 concurrency:
-  group: transfer
+  group: transfer-${{ inputs.from_name}}
   cancel-in-progress: false
 
 jobs:
