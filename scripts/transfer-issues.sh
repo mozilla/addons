@@ -16,7 +16,6 @@ set -xue
 
 # The label ID for https://github.com/mozilla/addons/labels/migration%3A2024
 MIGRATION_LABEL_ID="LA_kwDOAn4H8M8AAAABmbq8hA"
-MIGRATION_NO_JIRA_ID="LA_kwDOAPqAY88AAAABm5JiFA"
 
 REPOSITORY_OWNER="mozilla"
 TO_NAME="addons"
@@ -111,6 +110,7 @@ new_issues_counter=1
 comment_counter=1
 
 repository_id=$(gh repo view "$TO_REPO" --json id --jq '.id')
+migration_label_no_jira_id=$(gh api /repos/$FROM_REPO/labels/migration:no-jira --jq '.node_id')
 
 while IFS= read -r issue; do
   issue_id=$(echo "$issue" | jq -r '.id')
@@ -129,7 +129,7 @@ while IFS= read -r issue; do
     comment_body="Old Jira Ticket: $jira_link"
     comment_mutation+=" t${comment_counter}: addComment(input: { subjectId: \"${issue_id}\", body: \"${comment_body}\" }) { __typename }"
   else
-    comment_mutation+=" t${comment_counter}: addLabelsToLabelable(input: {labelableId: \"$issue_id\", labelIds: [\"$MIGRATION_NO_JIRA_ID\"]}) { __typename }"
+    comment_mutation+=" t${comment_counter}: addLabelsToLabelable(input: {labelableId: \"$issue_id\", labelIds: [\"$migration_label_no_jira_id\"]}) { __typename }"
   fi
   comment_counter=$((comment_counter+1))
 
