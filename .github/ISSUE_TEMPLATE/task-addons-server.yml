@@ -1,4 +1,4 @@
-name: Task (addons-server)
+name: Task/Feature request
 description: Filing a Task/Feature request
 title: "[Task]: "
 labels: ["type:feature", "needs:info", "repository:addons-server", "repository:addons-frontend"]
