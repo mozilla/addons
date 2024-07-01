@@ -1,7 +1,7 @@
 name: Task (addons-server)
-description: Filing a task (contributors only)
+description: Filing a Task/Feature request
 title: "[Task]: "
-labels: ["type:feature", "needs:info", "repository:addons-server"]
+labels: ["type:feature", "needs:info", "repository:addons-server", "repository:addons-frontend"]
 projects: []
 body:
   - type: textarea
@@ -22,8 +22,7 @@ body:
       description: List of milestones or checkpoints that if met verify the task has been completed.
       value: |
         ```[tasklist]
-          ### Acceptance Criteria
-          - [ ] 
+          - [ ] First milestone/checkpoint
           ```
     validations:
       required: true
@@ -33,6 +32,8 @@ body:
       label: Checks
       description: Checks before submitting the issue
       options:
-        -
-          label: If the issue is ready to work on, I have removed the "needs:info" label.
+        - label: If the issue is ready to work on, I have removed the "needs:info" label.
           required: true
+        - label: If I have identified that the work is specific to a repository, I have removed "repository:addons-server" or "repository:addons-frontend"
+          required: true
+  
