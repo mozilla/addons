@@ -11,12 +11,13 @@ body:
       description: |
         A few sentences describing what the task aims to achieve. It can be a simple sentence or a story formatted paragraph.
         Be concise and detailed. Avoid vague terms and include relevant links.
-        ```[tasklist]
-          ### Acceptance Criteria
-          - [ ] List of milestones or checkpoints that if met verify the task has been completed.
-          ```
       placeholder: |
         As a <blank>, I want to <blank, so that I can <blank>
+
+        ```[tasklist]
+          ### Acceptance Criteria
+          - [ ] List milestones or checkpoints that if met verify the task has been completed.
+          ```
     validations:
       required: true
   - type: checkboxes
