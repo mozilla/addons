@@ -13,12 +13,19 @@ body:
         Be concise and detailed. Avoid vague terms and include relevant links.
       placeholder: |
         As a <blank>, I want to <blank, so that I can <blank>
-
-        ```[tasklist]
-          ### Acceptance Criteria
-          - [ ] List milestones or checkpoints that if met verify the task has been completed.
-          ```
     validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: List of milestones or checkpoints that if met verify the task has been completed.
+      value: |
+        ```[tasklist]
+          ### Milestones/checkpoints
+          - [ ] A sentence describing the first milestone/checkpoint
+        ```
+      validations:
       required: true
   - type: checkboxes
     id: checks
