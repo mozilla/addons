@@ -9,3 +9,4 @@ Contents:
    :maxdepth: 2
 
    push-duty.rst
+   push_duty/index.rst
