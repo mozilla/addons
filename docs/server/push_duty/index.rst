@@ -17,6 +17,11 @@ This section will outline the steps to take for specific actions that you might 
    remora.rst
    monitoring.rst
 
+   project-dependencies.rst
+   security-fixes.rst
+   extension-workshop.rst
+   push-to-stage.rst
+   extract-locales.rst
 
 
 
