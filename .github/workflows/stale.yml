@@ -25,7 +25,7 @@ jobs:
           recent activity. If you think this bug should stay open, please comment on 
           the issue with further details. Thank you for your contributions.
         stale-issue-label: 'state:stale'
-        days-before-stale: 180
+        days-before-stale: 90
         days-before-close: 14
         exempt-issue-labels: >-
           contrib:maybe_good_first_bug,
