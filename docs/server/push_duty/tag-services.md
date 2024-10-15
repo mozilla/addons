@@ -58,7 +58,7 @@ Here is a full example:
 git checkout master
 git pull
 git tag 2015.09.10
-git push origin 2015.09.10
+git push upstream 2015.09.10
 ```
 
 ## Checking the remote
