@@ -55,7 +55,7 @@ git push <remote> <tag-date>
 Here is a full example:
 
 ```bash
-git checkout main
+git checkout master
 git pull
 git tag 2015.09.10
 git push origin 2015.09.10
