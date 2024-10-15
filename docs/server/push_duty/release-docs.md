@@ -30,7 +30,7 @@ In order to publish the release, click the edit icon at the top right of the rel
 <img src="../../images/publish_release.png" width="50%">
 
 ```{warning}
-Make sure that the relase is tagged as "latest". This is the default behavior but don't accidentally un-check it.
+Make sure that the release is tagged as "latest". This is the default behavior but don't accidentally un-check it.
 ```
 
 <img src="../../images/latest_release.png" width="50%">
