@@ -18,7 +18,7 @@ The date is the date of the push, not the date of tagging.
 To create a new tag, you have to checkout a branch that will be used for the tag.
 This is almost always the default branch of the repository.
 
-You can find out the default branch by running
+You can find out the default branch by checking on the [github UI](gitub_addons_server) running
 
 ```bash
 gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
@@ -78,3 +78,5 @@ If you don't have the upstream remote set up, you can add it by running:
 ```bash
 git remote add upstream <upstream-url>
 ```
+
+gitub_addons_server: https://github.com/mozilla/addons-server
