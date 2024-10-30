@@ -32,10 +32,6 @@ On Thursday at [09:00 PT](http://www.timebie.com/std/pst.php?q=9), we deploy to 
 - create a new release document for the next push hero (see [release docs](./release-docs))
 - update the topic of the AMO Matrix channel and the #remora slack channel to include the handle of next week's push hero (see :doc:`remora <./remora>`)
 
-## Push Runbook
-
-This section will outline the steps to take for specific actions that you might need to perform before, during and/or after a push. The push runbook is a living document and should be updated as needed. Please reference it in the push notes for each push.
-
 ## Runbooks
 
 This section will outline the steps to take for specific actions that you might need to perform before, during and/or after a push. The push runbook is a living document and should be updated as needed. Please reference it in the push notes for each push. As well as in the above push duty document.
