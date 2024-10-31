@@ -1,3 +1,4 @@
 docs/_gh-pages
 docs/_build
 .DS_Store
+venv

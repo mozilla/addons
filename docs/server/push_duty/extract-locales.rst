@@ -1,2 +1,0 @@
-extract-locales
-===============
