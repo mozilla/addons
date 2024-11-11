@@ -8,8 +8,24 @@ on:
     branches:
       - main
 
+env:
+  docs_artifact: docs
+
 jobs:
-  build_docs:
+  context:
+    runs-on: ubuntu-latest
+
+    outputs:
+      is_release_master: ${{ steps.context.outputs.is_release_master }}
+      is_default_branch: ${{ steps.context.outputs.is_default_branch }}
+      is_fork: ${{ steps.context.outputs.is_fork }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - id: context
+        uses: ./.github/actions/context
+
+  docs_build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,18 +42,34 @@ jobs:
       - name: Build documentation
         run: make -C docs html
 
-      - name: Upload artifact for deployment (Push to main)
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/_build/html
+          path: 'docs/_build/html'
+          name: ${{ env.docs_artifact }}
 
-  deploy:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    needs: build_docs
-    runs-on: ubuntu-latest
+  docs_deploy:
+    needs: [context, docs_build]
+    # Only deploy docs on a push event
+    # to the default branch
+    # that is not running on a fork
+    if: |
+      github.event_name == 'push' &&
+      needs.context.outputs.is_default_branch == 'true' &&
+      needs.context.outputs.is_fork == 'false'
     permissions:
+      contents: read
       pages: write
       id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: ${{ env.docs_artifact }}
+
