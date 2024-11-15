@@ -23,7 +23,7 @@ Never submit security-related bugs through a Github Issue or by email.
 ## Documentation
 
 This project contains general documentation relating to the Add-ons project.
-[You can view the docs here](https://addons.readthedocs.io).
+[You can view the docs here](https://mozilla.github.io/addons/).
 
 If you would like to contribute to the docs, here's how to set up a development
 environment:
