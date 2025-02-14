@@ -1,7 +1,7 @@
-name: Test Actions on Push
+name: Test Actions on Pull Request
 
 on:
-  push:
+  pull_request:
   workflow_dispatch:
     inputs:
       message:
