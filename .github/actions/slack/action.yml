@@ -1,0 +1,39 @@
+name: 'Send Slack Message'
+description: 'Sends a message to a specified Slack channel'
+
+inputs:
+  slack_token:
+    description: 'Slack Bot User OAuth Token'
+    required: true
+  message:
+    description: 'Message to send to Slack'
+    required: true
+  channel_id:
+    description: 'Slack Channel ID to send message to'
+    required: true
+
+runs:
+  using: 'composite'
+
+  steps:
+  - name: Post formatted message to Slack channel
+    uses: slackapi/slack-github-action@v2.0.0
+    env:
+      workflow_run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    with:
+      errors: true
+      method: chat.postMessage
+      token: ${{ inputs.slack_token }}
+      payload: |
+        channel: ${{ inputs.channel_id }}
+        blocks:
+          - type: context
+            elements:
+              - type: mrkdwn
+                text: ":github: *Workflow Run:* ${{ env.workflow_run }}"
+              - type: mrkdwn
+                text: ":bust_in_silhouette: *Triggered by:* @${{ github.actor }}"
+          - type: section
+            text:
+              type: mrkdwn
+              text: ${{ inputs.message }}
