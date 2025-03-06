@@ -55,7 +55,7 @@ runs:
         workflow_id="${{ inputs.workflow_id }}"
         workflow_url="${{ inputs.workflow_url }}"
 
-        message="${emoji} [*${env}*] _${actor}_ *${event}* <${ref_link}|${ref}> completed with *${conclusion}* | workflow: <${workflow_url}|${workflow_id}> "
+        message="${emoji} [*${env}*] _${actor}_ *${event}* <${ref_link}|${ref}> *${conclusion}* | workflow: <${workflow_url}|${workflow_id}> "
 
         echo "message=${message}" >> $GITHUB_OUTPUT
         echo "workflow_id=${workflow_id}" >> $GITHUB_OUTPUT
@@ -70,8 +70,3 @@ runs:
         payload: |
           channel: "${{ inputs.slack_channel }}"
           text: "${{ steps.context.outputs.message }}"
-          # blocks:
-          #   - type: section
-          #     text:
-          #       type: mrkdwn
-          #       text: "${{ steps.context.outputs.message }}"
