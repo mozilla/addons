@@ -70,8 +70,8 @@ runs:
         payload: |
           channel: "${{ inputs.slack_channel }}"
           text: "${{ steps.context.outputs.message }}"
-          blocks:
-            - type: section
-              text:
-                type: mrkdwn
-                text: "${{ steps.context.outputs.message }}"
+          # blocks:
+          #   - type: section
+          #     text:
+          #       type: mrkdwn
+          #       text: "${{ steps.context.outputs.message }}"
