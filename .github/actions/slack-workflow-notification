@@ -1,0 +1,77 @@
+name: Slack Workflow Notification
+description: Send a message to Slack when a workflow completes
+
+inputs:
+  slack_token:
+    description: Slack token
+    required: true
+  slack_channel:
+    description: Slack channel
+    required: true
+  emoji:
+    description: The emoji to use in the message
+    required: false
+    default: ":white_check_mark:"
+  actor:
+    description: The user who triggered the workflow
+    required: true
+  event:
+    description: The event that triggered the workflow
+    required: true
+  conclusion:
+    description: The conclusion of the workflow
+    required: true
+  env:
+    description: The environment the workflow is related to
+    required: true
+  ref:
+    description: The artifact reference (commit, tag, etc) of the workflow
+    required: true
+  ref_link:
+    description: The link to the artifact reference (commit, tag, etc) of the workflow
+    required: true
+  workflow_id:
+    description: The ID of the workflow that is being notified about
+    required: true
+  workflow_url:
+    description: The URL of the workflow that is being notified about
+    required: true
+
+
+runs:
+  using: composite
+  steps:
+    - name: Context
+      id:  context
+      shell: bash
+      run: |
+        emoji="${{ inputs.emoji }}"
+        actor="${{ inputs.actor }}"
+        event="${{ inputs.event }}"
+        conclusion="${{ inputs.conclusion }}"
+        env="${{ inputs.env }}"
+        ref="${{ inputs.ref }}"
+        ref_link="${{ inputs.ref_link }}"
+        workflow_id="${{ inputs.workflow_id }}"
+        workflow_url="${{ inputs.workflow_url }}"
+
+        message="${emoji} [*${env}*] _${actor}_ *${event}* <${ref_link}|${ref}> completed with *${conclusion}* | workflow: <${workflow_url}|${workflow_id}> "
+
+        echo "message=${message}" >> $GITHUB_OUTPUT
+        echo "workflow_id=${workflow_id}" >> $GITHUB_OUTPUT
+        echo "workflow_url=${workflow_url}" >> $GITHUB_OUTPUT
+        cat $GITHUB_OUTPUT
+
+    - name: Notify Slack
+      uses: mozilla/addons/.github/actions/slack@main
+      with:
+        slack_token: ${{ inputs.slack_token }}
+        method: chat.postMessage
+        payload: |
+          channel: "${{ inputs.slack_channel }}"
+          text: "${{ steps.context.outputs.message }}"
+          blocks:
+            - type: section
+              text:
+                type: mrkdwn
+                text: "${{ steps.context.outputs.message }}"
