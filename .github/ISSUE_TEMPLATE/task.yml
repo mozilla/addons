@@ -1,0 +1,16 @@
+name: Task
+description: Task implementing a portion of a feature
+title: "[Task]: "
+type: task
+labels: ["type:task", "needs:info"]
+projects: []
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        A few sentences describing what the task aims to achieve. It can be a simple sentence or a story formatted paragraph.
+        Be concise and detailed. Avoid vague terms and include relevant links.
+    validations:
+      required: true
