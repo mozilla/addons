@@ -1,6 +1,6 @@
-name: Feature request
-description: Filing a Feature request
-title: "[Feature]: "
+name: Task/Feature request
+description: Filing a Task/Feature request
+title: "[Task]: "
 type: feature
 labels: ["type:feature", "needs:info"]
 projects: []
