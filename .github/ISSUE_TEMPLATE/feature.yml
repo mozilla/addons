@@ -22,7 +22,7 @@ body:
       label: Acceptance Criteria
       description: List of milestones or checkpoints that if met verify the task has been completed.
       value: |
-          - [ ] task 1
+          - [ ] item 1
     validations:
       required: true
   - type: checkboxes
