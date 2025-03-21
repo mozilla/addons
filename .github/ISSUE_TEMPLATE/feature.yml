@@ -1,0 +1,28 @@
+name: Task/Feature request
+description: Filing a Task/Feature request
+title: "[Task]: "
+type: feature
+labels: ["type:feature", "needs:info"]
+projects: []
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        A few sentences describing what the feature aims to achieve. It can be a simple sentence or a story formatted paragraph.
+        Be concise and detailed. Avoid vague terms and include relevant links.
+      placeholder: |
+        As a <blank>, I want to <blank, so that I can <blank>
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: List of milestones or checkpoints that if met verify the task has been completed.
+      value: |
+          - [ ] item 1
+    validations:
+      required: true
+
