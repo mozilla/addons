@@ -25,12 +25,4 @@ body:
           - [ ] item 1
     validations:
       required: true
-  - type: checkboxes
-    id: checks
-    attributes:
-      label: Checks
-      description: Checks before submitting the issue
-      options:
-        - label: If I have identified that the work is specific to a repository, I have removed "repository:addons-server" or "repository:addons-frontend"
-          required: true
 
