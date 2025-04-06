@@ -94,7 +94,7 @@ on Tuesdays.
 When can I expect to see my strings land?
 -----------------------------------------
 
-Once translations are commmitted into our repositories they are visible on
+Once translations are committed into our repositories they are visible on
 our dev server within 30mins (or as long as it takes to deploy the code).
 
 Master is tagged and pushed to stage weekly at around 9am PST every Tuesday.
