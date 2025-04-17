@@ -1,0 +1,66 @@
+name: PR Comment
+description: Add a comment to a PR
+
+inputs:
+  owner:
+    required: true
+    description: The owner of the repository
+  repo:
+    required: true
+    description: The name of the repository
+  pr:
+    required: true
+    description: The PR number
+  body:
+    required: true
+    description: The comment to add
+  github_token:
+    required: true
+    description: The GitHub token
+  edit_last:
+    required: false
+    description: Whether to edit the last comment or add a new one
+
+outputs:
+  url:
+    description: The URL of the comment
+    value: ${{ steps.comment.outputs.url }}
+  id:
+    description: The ID of the comment
+    value: ${{ steps.comment.outputs.id }}
+
+runs:
+  using: composite
+  steps:
+    - name: Comment
+      shell: bash
+      run: |
+        # --- Input variables ---
+        owner="${{ inputs.owner }}"
+        repo="${{ inputs.repo }}"
+        pr_number="${{ inputs.pr }}"
+        edit_last="${{ inputs.edit_last }}"
+        tmp_file=$(mktemp)
+
+        cat <<'EOF' > "$tmp_file"
+        ${inputs.body}
+        EOF
+
+        args="--repo ${owner}/${repo} --body-file $tmp_file"
+        # If edit_last is true, edit the last comment, otherwise add a new one
+        if [[ "${edit_last}" == "true" ]]; then
+          args="$args --edit-last"
+        fi
+
+        # Run the command
+        command="gh pr comment ${pr_number} ${args}"
+        echo "Running: $command"
+        url=$(eval "$command")
+
+        # Url returns like: {{base}}/{{owner}}/{{name}}/pull/{{pr}}#issuecomment-<id>
+        id=$(echo "$url" | grep -o 'issuecomment-[0-9]*' | sed 's/issuecomment-//')
+
+        echo "id=$id" >> "$GITHUB_OUTPUT"
+        echo "url=$url" >> "$GITHUB_OUTPUT"
+        cat "$GITHUB_OUTPUT"
+
