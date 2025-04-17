@@ -44,7 +44,7 @@ runs:
         ${{ inputs.body }}
         EOF
 
-        args="--repo ${repo} --body-file $tmp_file"
+        args="--repo ${repo} --body-file $tmp_file --create-if-none"
         # If edit_last is true, edit the last comment, otherwise add a new one
         if [[ "${edit_last}" == "true" ]]; then
           args="$args --edit-last"
