@@ -2,9 +2,6 @@ name: PR Comment
 description: Add a comment to a PR
 
 inputs:
-  owner:
-    required: true
-    description: The owner of the repository
   repo:
     required: true
     description: The name of the repository
@@ -38,7 +35,6 @@ runs:
         GH_TOKEN: ${{ inputs.github_token }}
       run: |
         # --- Input variables ---
-        owner="${{ inputs.owner }}"
         repo="${{ inputs.repo }}"
         pr_number="${{ inputs.pr }}"
         edit_last="${{ inputs.edit_last }}"
@@ -48,7 +44,7 @@ runs:
         ${inputs.body}
         EOF
 
-        args="--repo ${owner}/${repo} --body-file $tmp_file"
+        args="--repo ${repo} --body-file $tmp_file"
         # If edit_last is true, edit the last comment, otherwise add a new one
         if [[ "${edit_last}" == "true" ]]; then
           args="$args --edit-last"
@@ -59,7 +55,7 @@ runs:
         echo "Running: $command"
         url=$(eval "$command")
 
-        # Url returns like: {{base}}/{{owner}}/{{name}}/pull/{{pr}}#issuecomment-<id>
+        # Url returns like: {{base}}//{{repo}}/pull/{{pr}}#issuecomment-<id>
         id=$(echo "$url" | grep -o 'issuecomment-[0-9]*' | sed 's/issuecomment-//')
 
         echo "id=$id" >> "$GITHUB_OUTPUT"
