@@ -34,6 +34,8 @@ runs:
   steps:
     - name: Comment
       shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
       run: |
         # --- Input variables ---
         owner="${{ inputs.owner }}"
