@@ -41,7 +41,7 @@ runs:
         tmp_file=$(mktemp)
 
         cat <<'EOF' > "$tmp_file"
-        ${inputs.body}
+        ${{ inputs.body }}
         EOF
 
         args="--repo ${repo} --body-file $tmp_file"
