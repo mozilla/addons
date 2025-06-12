@@ -8,13 +8,25 @@ inputs:
   workload_identity_provider:
     required: true
     description: The workloadd
+
+outputs:
   registry:
-    required: true
-    description: The GAR registry
+    description: The gar registry
+    value: ${{ steps.context.outputs.registry }}
+  image:
+    description: The gar image to push to
+    value: ${{ steps.context.outputs.image }}
 
 runs:
   using: 'composite'
   steps:
+    - name: Set Context
+      id: context
+      shell: bash
+      run: |
+        echo "registry=us-docker.pkg.dev" >> $GITHUB_OUTPUT
+        echo "image=moz-fx-amo-prod/amo-prod/addons-server" >> $GITHUB_OUTPUT
+
     - name: get the GCP auth token
       id: gcp-auth
       uses: google-github-actions/auth@v2
@@ -27,7 +39,7 @@ runs:
       if: steps.gcp-auth.outcome == 'success'
       uses: docker/login-action@v3
       with:
-        registry: ${{ inputs.registry }}
+        registry: ${{ steps.context.outputs.registry }}
         username: oauth2accesstoken
         password: ${{ steps.gcp-auth.outputs.access_token }}
 
