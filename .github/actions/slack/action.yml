@@ -12,12 +12,29 @@ inputs:
     description: 'Slack method to call'
     required: true
     default: 'chat.postMessage'
+  dry_run:
+    description: 'Only print output'
+    required: false
+    default: false
 
 runs:
   using: 'composite'
 
   steps:
-  - name: Raw Slack payload
+  - name: Send Message (dry)
+    if: ${{ inputs.dry_run == 'true' }}
+    shell: bash
+    run: |
+      echo "Sending slack message (dry-run)"
+      echo "method: $method"
+      echo "token: ***"
+      echo "payload:"
+      cat <<EOF
+      ${{ inputs.payload }}
+      EOF
+
+  - name: Send Message
+    if: ${{ inputs.dry_run != 'true' }}
     uses: slackapi/slack-github-action@v2.0.0
     with:
       errors: true
