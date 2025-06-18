@@ -36,7 +36,10 @@ inputs:
   workflow_url:
     description: The URL of the workflow that is being notified about
     required: true
-
+  dry_run:
+    description: 'Print message info'
+    required: false
+    default: false
 
 runs:
   using: composite
@@ -70,3 +73,4 @@ runs:
         payload: |
           channel: "${{ inputs.slack_channel }}"
           text: "${{ steps.context.outputs.message }}"
+        dry_run: ${{ inputs.dry_run }}
