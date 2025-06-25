@@ -8,38 +8,31 @@ inputs:
   slack_channel:
     description: Slack channel
     required: true
-  emoji:
-    description: The emoji to use in the message
-    required: false
-    default: ":white_check_mark:"
-  actor:
-    description: The user who triggered the workflow
-    required: true
-  event:
-    description: The event that triggered the workflow
-    required: true
   conclusion:
     description: The conclusion of the workflow
     required: true
-  env:
-    description: The environment the workflow is related to
+  text:
+    description: The text to display in the main message
     required: true
-  ref:
-    description: The artifact reference (commit, tag, etc) of the workflow
-    required: true
-  ref_link:
-    description: The link to the artifact reference (commit, tag, etc) of the workflow
-    required: true
-  workflow_id:
-    description: The ID of the workflow that is being notified about
-    required: true
-  workflow_url:
-    description: The URL of the workflow that is being notified about
-    required: true
+  text_link:
+    description: Optional link for main text
+    required: false
   dry_run:
     description: 'Print message info'
     required: false
-    default: false
+    default: 'false'
+  context:
+    description: A list of contextual text blocks (text) to display after the main message
+    required: false
+    default: "null"
+  links:
+    description: A list of links (text:url) to display after the main message
+    required: false
+    default: "null"
+  separator:
+    description: Optional override the separator for context/link blocks
+    required: false
+    default: '|'
 
 runs:
   using: composite
@@ -47,30 +40,61 @@ runs:
     - name: Context
       id:  context
       shell: bash
+      env:
+        conclusion: ${{ inputs.conclusion }}
+        text_content: ${{ inputs.text }}
+        text_link: ${{ inputs.text_link }}
+        context: ${{ inputs.context }}
+        links: ${{ inputs.links }}
+        separator: ${{ inputs.separator }}
       run: |
-        emoji="${{ inputs.emoji }}"
-        actor="${{ inputs.actor }}"
-        event="${{ inputs.event }}"
-        conclusion="${{ inputs.conclusion }}"
-        env="${{ inputs.env }}"
-        ref="${{ inputs.ref }}"
-        ref_link="${{ inputs.ref_link }}"
-        workflow_id="${{ inputs.workflow_id }}"
-        workflow_url="${{ inputs.workflow_url }}"
+        text=""
 
-        message="${emoji} [*${env}*] _${actor}_ *${event}* <${ref_link}|${ref}> *${conclusion}* | workflow: <${workflow_url}|${workflow_id}> "
+        if [[ "${conclusion}" == "success" ]]; then
+          text=":white_check_mark:"
+        elif [[ "${conclusion}" == "failure" ]]; then
+          text=":x:"
+        elif [[ "${conclusion}" == "cancelled" ]]; then
+          text=":warning:"
+        fi
 
-        echo "message=${message}" >> $GITHUB_OUTPUT
-        echo "workflow_id=${workflow_id}" >> $GITHUB_OUTPUT
-        echo "workflow_url=${workflow_url}" >> $GITHUB_OUTPUT
-        cat $GITHUB_OUTPUT
+        if [ -n "${text_link}" ]; then
+          text="${text} <${text_link}|${text_content}>"
+        else
+          text="${text} ${text_content}"
+        fi
+
+        links_arr="[]"
+        context_arr="[]"
+
+        if [ -n "${links}" ] && [ "${links}" != "null" ]; then
+          # Convert JSON to array of slack compliant markdown links
+          links_arr=$(echo "${links}" | jq 'to_entries | map("<\(.value)|\(.key)>")')
+        fi
+
+        if [ -n "${context}" ] && [ "${context}" != "null" ]; then
+          # Convert JSON to array of slack compliant markdown text
+          context_arr=$(echo "${context}" | jq 'to_entries | map("*\(.key)*: \(.value)")')
+        fi
+
+        # Combine the two arrays into a separated text list
+        combined_blocks=$(echo "${context_arr}" "${links_arr}" | jq -rs 'add')
+        # Join arrays with separator into a single value
+        blocks=$(echo "${combined_blocks}" | jq -r --arg s "${separator}" 'join(" \($s) ")')
+
+        if [ -n "${blocks}" ]; then
+          text="${text} | ${blocks}"
+        fi
+
+        echo "text=${text}" >> "${GITHUB_OUTPUT}"
+        cat "${GITHUB_OUTPUT}"
 
     - name: Notify Slack
-      uses: mozilla/addons/.github/actions/slack@main
+      uses: ./.github/actions/slack
       with:
         slack_token: ${{ inputs.slack_token }}
         method: chat.postMessage
         payload: |
           channel: "${{ inputs.slack_channel }}"
-          text: "${{ steps.context.outputs.message }}"
+          text: ${{ toJSON(steps.context.outputs.text) }}
         dry_run: ${{ inputs.dry_run }}
