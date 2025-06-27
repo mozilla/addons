@@ -20,31 +20,35 @@ jobs:
             conclusion: failure
             text: "push afd4d2f (Update Makefile-docker (#23610)"
             text_link: "https://github.com/mozilla/addons"
-            context: {
-              "one": "thing"
-            }
+            context: |
+              {
+                "one": "thing"
+              }
           - name: Test with links but no context
             conclusion: success
             text: "push afd4d2f (Update Makefile-docker (#23610)"
             text_link: "https://github.com/mozilla/addons"
-            links: {
-              "link1": "https://github.com/mozilla/addons",
-              "link2": "https://github.com/mozilla/addons"
-            }
+            links: |
+              {
+                "link1": "https://github.com/mozilla/addons",
+                "link2": "https://github.com/mozilla/addons"
+              }
           - name: Test with both context and links
             conclusion: cancelled
             text: "push afd4d2f (Update Makefile-docker (#23610)"
             text_link: "https://github.com/mozilla/addons"
-            context: {
-              "one": "thing with spaces",
-              "two": "thing with \\ special ; '' \" characters",
-              "three": "thing with *bold* and _italic_"
-            }
-            links: {
-              "link1": "https://github.com/mozilla/addons",
-              "link2": "https://github.com/mozilla/addons",
-              "link3": "https://github.com/mozilla/addons"
-            }
+            context: |
+              {
+                "one": "thing with spaces",
+                "two": "thing with \\ special ; '' \" characters",
+                "three": "thing with *bold* and _italic_"
+              }
+            links: |
+              {
+                "link1": "https://github.com/mozilla/addons",
+                "link2": "https://github.com/mozilla/addons",
+                "link3": "https://github.com/mozilla/addons"
+              }
 
     steps:
       - name: Slack Workflow Notification
