@@ -40,5 +40,5 @@ runs:
     with:
       errors: true
       token: ${{ inputs.slack_token }}
-      method: ${{ steps.context.outputs.method }}
-      payload: ${{ steps.context.outputs.payload }}
+      method: ${{ inputs.method }}
+      payload: ${{ inputs.payload }}
