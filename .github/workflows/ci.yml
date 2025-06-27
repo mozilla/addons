@@ -47,11 +47,8 @@ jobs:
             }
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Slack Workflow Notification
-        uses: ./.github/actions/slack-workflow-notification
+        uses: mozilla/addons/.github/actions/slack-workflow-notification@${{ github.sha }}
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           slack_channel: ${{ secrets.SLACK_CHANNEL }}
