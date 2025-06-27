@@ -48,20 +48,22 @@ runs:
         links: ${{ inputs.links }}
         separator: ${{ inputs.separator }}
       run: |
-        text=""
+        emoji=":github-actions-autolink-reference:"
 
         if [[ "${conclusion}" == "success" ]]; then
-          text=":white_check_mark:"
+          emoji=":github-actions-success:"
         elif [[ "${conclusion}" == "failure" ]]; then
-          text=":x:"
+          emoji=":github-actions-failure:"
         elif [[ "${conclusion}" == "cancelled" ]]; then
-          text=":warning:"
+          emoji=":github-actions-cancelled:"
+        elif [[ "${conclusion}" == "skipped" ]]; then
+          emoji=":github-actions-skip:"
         fi
 
         if [ -n "${text_link}" ]; then
-          text="${text} <${text_link}|${text_content}>"
+          text="${emoji} <${text_link}|${text_content}>"
         else
-          text="${text} ${text_content}"
+          text="${emoji} ${text_content}"
         fi
 
         links_arr="[]"
