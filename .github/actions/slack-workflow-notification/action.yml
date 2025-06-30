@@ -17,6 +17,7 @@ inputs:
   text_link:
     description: Optional link for main text
     required: false
+    default: "null"
   dry_run:
     description: 'Print message info'
     required: false
@@ -60,11 +61,11 @@ runs:
           emoji=":github-actions-skip:"
         fi
 
-        if [ -n "${text_link}" ]; then
-          text="${emoji} <${text_link}|${text_content}>"
-        else
-          text="${emoji} ${text_content}"
+        if [ "${text_link}" != "null" ]; then
+          text_content="<${text_link}|${text_content}>"
         fi
+
+        text="${emoji} ${text_content}"
 
         links_arr="[]"
         context_arr="[]"
