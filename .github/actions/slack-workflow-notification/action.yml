@@ -93,7 +93,7 @@ runs:
         cat "${GITHUB_OUTPUT}"
 
     - name: Notify Slack
-      uses: mozilla/addons/.github/actions/slack@test-actions
+      uses: mozilla/addons/.github/actions/slack@main
       with:
         slack_token: ${{ inputs.slack_token }}
         method: chat.postMessage
