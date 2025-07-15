@@ -21,23 +21,24 @@ runs:
   using: 'composite'
 
   steps:
-  - name: Send Message (dry)
-    if: ${{ inputs.dry_run == 'true' }}
+  - name: Context
+    id: context
     shell: bash
+    env:
+      payload: ${{ inputs.payload }}
+      method: ${{ inputs.method }}
     run: |
-      echo "Sending slack message (dry-run)"
+      echo "Sending slack API call"
       echo "method: $method"
       echo "token: ***"
-      echo "payload:"
-      cat <<EOF
-      ${{ inputs.payload }}
-      EOF
+      echo "---- payload ----"
+      echo "${payload}"
 
   - name: Send Message
     if: ${{ inputs.dry_run != 'true' }}
     uses: slackapi/slack-github-action@v2.0.0
     with:
       errors: true
-      method: ${{ inputs.method }}
       token: ${{ inputs.slack_token }}
+      method: ${{ inputs.method }}
       payload: ${{ inputs.payload }}

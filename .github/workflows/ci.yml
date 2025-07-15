@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  slack_workflow_notification:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Test with no context or links
+            conclusion: success
+            text: "push afd4d2f (Update Makefile-docker (#23610)"
+            text_link: "https://github.com/mozilla/addons"
+          - name: Test with context but no links
+            conclusion: failure
+            text: "push afd4d2f (Update Makefile-docker (#23610)"
+            text_link: "https://github.com/mozilla/addons"
+            context: |
+              {
+                "one": "thing"
+              }
+          - name: Test with links but no context
+            conclusion: success
+            text: "push afd4d2f (Update Makefile-docker (#23610)"
+            text_link: "https://github.com/mozilla/addons"
+            links: |
+              {
+                "link1": "https://github.com/mozilla/addons",
+                "link2": "https://github.com/mozilla/addons"
+              }
+          - name: Test with both context and links
+            conclusion: cancelled
+            text: "push afd4d2f (Update Makefile-docker (#23610)"
+            text_link: "https://github.com/mozilla/addons"
+            context: |
+              {
+                "one": "thing with spaces",
+                "two": "thing with \\ special ; '' \" characters",
+                "three": "thing with *bold* and _italic_"
+              }
+            links: |
+              {
+                "link1": "https://github.com/mozilla/addons",
+                "link2": "https://github.com/mozilla/addons",
+                "link3": "https://github.com/mozilla/addons"
+              }
+
+    steps:
+      - name: Slack Workflow Notification
+        uses: mozilla/addons/.github/actions/slack-workflow-notification@${{ github.sha }}
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          slack_channel: ${{ secrets.SLACK_CHANNEL }}
+          conclusion: ${{ matrix.conclusion }}
+          text: ${{ matrix.text }}
+          text_link: ${{ matrix.text_link }}
+          context: ${{ toJSON(matrix.context) }}
+          links: ${{ toJSON(matrix.links) }}
+          dry_run: true
+
