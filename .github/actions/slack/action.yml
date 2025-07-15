@@ -15,7 +15,7 @@ inputs:
   dry_run:
     description: 'Only print output'
     required: false
-    default: false
+    default: ""
 
 runs:
   using: 'composite'
@@ -35,7 +35,7 @@ runs:
       echo "${payload}"
 
   - name: Send Message
-    if: ${{ inputs.dry_run != 'true' }}
+    if: ${{ inputs.dry_run }}
     uses: slackapi/slack-github-action@v2.0.0
     with:
       errors: true
