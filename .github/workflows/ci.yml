@@ -1,18 +1,190 @@
 name: CI
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
 
+env:
+  SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_TEST }}
+
 jobs:
-  slack_workflow_notification:
+  slack_action_payload:
     runs-on: ubuntu-latest
+    name: Test Slack Action ${{ matrix.name }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: Test with no context or links
+          -
+            name: "Payload has empty text"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: ""
+            expect_failure: false
+          -
+            name: "Payload is undefined"
+            expect_failure: true
+          -
+            name: "Payload has text"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: "Hello, world!"
+            expect_failure: false
+          -
+            name: "Payload has number text"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: 123
+            expect_failure: false
+          -
+            name: "Payload has boolean text"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: true
+            expect_failure: false
+          -
+            name: "Payload has complex object"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: "Deployment started :eyes:"
+              attachments:
+                - color: "dbab09"
+                  fields:
+                    - title: "Status"
+                      short: true
+                      value: "In Progress"
+            expect_failure: false
+          -
+            name: "Payload has invalid JSON"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: |
+                { 3: "thing", null }
+            expect_failure: false
+          -
+            name: "Payload missing channel"
+            payload: |
+              text: "Hello, world!"
+            expect_failure: true
+          -
+            name: "Payload with very long text"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: "This is a very long message that exceeds normal limits and should test how the system handles extremely long text content that might cause issues with Slack API limits or YAML parsing. It contains many characters and should be properly handled by the validation logic."
+            expect_failure: false
+          -
+            name: "Payload with special characters"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: "Message with special chars: & < > \" ' \n \t \r"
+            expect_failure: false
+          -
+            name: "Payload with different method"
+            payload: |
+              channel: ${{ vars.SLACK_CHANNEL_TEST }}
+              text: "Testing different method"
+            method: chat.postEphemeral
+            expect_failure: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Slack Action Payload
+        id: slack
+        continue-on-error: true
+        uses: ./.github/actions/slack
+        with:
+          slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: ${{ matrix.payload}}
+          method: ${{ matrix.method || 'chat.postMessage' }}
+          dry_run: true
+
+      - name: "Verify outcome"
+        env:
+          result: ${{ steps.slack.outcome }}
+          expect_failure: ${{ matrix.expect_failure }}
+        run: |
+          if [[ "${expect_failure}" == "true" && "${result}" != "failure" ]]; then
+            echo "Expected failure!"
+            exit 1
+          fi
+          if [[ "${expect_failure}" == "false" && "${result}" != "success" ]]; then
+            echo "Expected success!"
+            exit 1
+          fi
+
+  slack_action_dry_run:
+    runs-on: ubuntu-latest
+    name: Test Slack Action ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          -
+            name: "Dry run is undefined"
+            expect_message: true
+          -
+            name: "Dry run is 'false'"
+            expect_message: true
+            dry_run: "false"
+          -
+            name: "Dry run is false"
+            expect_message: true
+            dry_run: false
+          -
+            name: "Dry run is 'true'"
+            expect_message: false
+            dry_run: "true"
+          -
+            name: "Dry run is true"
+            expect_message: false
+            dry_run: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Test Slack Action: ${{ matrix.name }}"
+        id: slack
+        continue-on-error: true
+        uses: ./.github/actions/slack
+        with:
+          # We explicitly don't pass the slack token so that we can test
+          # If the action actually attempts to send a message. This would
+          # fail and we can assert that an attempt was made to send the message.
+          # slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            channel: ${{ vars.SLACK_CHANNEL_TEST }}
+            text: "Dry run is '${{ matrix.dry_run }}'"
+          method: chat.postMessage
+          dry_run: ${{ matrix.dry_run }}
+
+      - name: "Verify outcome"
+        env:
+          result: ${{ steps.slack.outcome }}
+          expect_message: ${{ matrix.expect_message }}
+        run: |
+          if [[ "${expect_message}" == "true" && "${result}" != "failure" ]]; then
+            echo "Expected message to be sent!"
+            exit 1
+          fi
+
+          if [[ "${expect_message}" == "false" && "${result}" == "failure" ]]; then
+            echo "Expected message to not be sent!"
+            exit 1
+          fi
+
+  slack_workflow_notification:
+    runs-on: ubuntu-latest
+    name: Test Slack Workflow Notification ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: with no context or links
             conclusion: success
             text: "push afd4d2f (Update Makefile-docker (#23610)"
             text_link: "https://github.com/mozilla/addons"
@@ -24,7 +196,7 @@ jobs:
               {
                 "one": "thing"
               }
-          - name: Test with links but no context
+          - name: with links but no context
             conclusion: success
             text: "push afd4d2f (Update Makefile-docker (#23610)"
             text_link: "https://github.com/mozilla/addons"
@@ -33,7 +205,7 @@ jobs:
                 "link1": "https://github.com/mozilla/addons",
                 "link2": "https://github.com/mozilla/addons"
               }
-          - name: Test with both context and links
+          - name: with both context and links
             conclusion: cancelled
             text: "push afd4d2f (Update Makefile-docker (#23610)"
             text_link: "https://github.com/mozilla/addons"
@@ -49,17 +221,48 @@ jobs:
                 "link2": "https://github.com/mozilla/addons",
                 "link3": "https://github.com/mozilla/addons"
               }
+          - name: with skipped conclusion
+            conclusion: skipped
+            text: "push afd4d2f (Update Makefile-docker (#23610)"
+            text_link: "https://github.com/mozilla/addons"
+          - name: with null text_link
+            conclusion: success
+            text: "push afd4d2f (Update Makefile-docker (#23610)"
+            text_link: "null"
+          - name: with empty context and links
+            conclusion: failure
+            text: "push afd4d2f (Update Makefile-docker (#23610)"
+            text_link: "https://github.com/mozilla/addons"
+            context: "{}"
+            links: "{}"
+          - name: with custom separator
+            conclusion: success
+            text: "push afd4d2f (Update Makefile-docker (#23610)"
+            text_link: "https://github.com/mozilla/addons"
+            context: |
+              {
+                "key1": "value1",
+                "key2": "value2"
+              }
+            links: |
+              {
+                "link1": "https://github.com/mozilla/addons"
+              }
+            separator: " • "
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Slack Workflow Notification
-        uses: mozilla/addons/.github/actions/slack-workflow-notification@${{ github.sha }}
+        uses: ./.github/actions/slack-workflow-notification
         with:
-          slack_token: ${{ secrets.SLACK_TOKEN }}
-          slack_channel: ${{ secrets.SLACK_CHANNEL }}
+          slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          slack_channel: ${{ vars.SLACK_CHANNEL_TEST }}
           conclusion: ${{ matrix.conclusion }}
           text: ${{ matrix.text }}
           text_link: ${{ matrix.text_link }}
-          context: ${{ toJSON(matrix.context) }}
-          links: ${{ toJSON(matrix.links) }}
+          context: ${{ matrix.context }}
+          links: ${{ matrix.links }}
+          separator: ${{ matrix.separator }}
           dry_run: true
 
