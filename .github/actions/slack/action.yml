@@ -20,8 +20,43 @@ runs:
   using: 'composite'
 
   steps:
+  - name: Validate payload
+    shell: bash
+    env:
+      payload: ${{ inputs.payload }}
+    run: |
+      if [ -z "${payload}" ]; then
+        echo "payload is empty"
+        exit 1
+      fi
+
+      # Validate that payload is valid YAML
+      echo "${payload}" | yq e '.'
+
+      # Validate that payload has "channel" field
+      channel_value=$(echo "${payload}" | yq e '.channel' -)
+      if [ "${channel_value}" = "null" ] || [ -z "${channel_value}" ]; then
+        echo "payload is missing channel field"
+        exit 1
+      fi
+
   - name: Context
     id: context
+    shell: bash
+    env:
+      dry_run: ${{ inputs.dry_run }}
+    run: |
+      send_message=true
+
+      if [ -n "${dry_run}" ] && [ "${dry_run}" != "false" ] && [ "${dry_run}" != "null" ]; then
+        send_message=false
+      fi
+
+      echo "send_message=${send_message}" >> "${GITHUB_OUTPUT}"
+      cat "${GITHUB_OUTPUT}"
+
+  - name: Send Message (dry run)
+    if: ${{ steps.context.outputs.send_message == 'false' }}
     shell: bash
     env:
       payload: ${{ inputs.payload }}
@@ -34,7 +69,7 @@ runs:
       echo "${payload}"
 
   - name: Send Message
-    if: ${{ !inputs.dry_run }}
+    if: ${{ steps.context.outputs.send_message == 'true' }}
     uses: slackapi/slack-github-action@v2.0.0
     with:
       errors: true
