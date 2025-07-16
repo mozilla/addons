@@ -99,5 +99,5 @@ runs:
         method: chat.postMessage
         payload: |
           channel: "${{ inputs.slack_channel }}"
-          text: "${{ steps.context.outputs.text }}"
+          text: ${{ toJSON(steps.context.outputs.text) }}
         dry_run: ${{ inputs.dry_run }}
