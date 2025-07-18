@@ -35,6 +35,7 @@ runs:
 
       # Validate that payload has "channel" field
       channel_value=$(echo "${payload}" | yq e '.channel' -)
+      echo "channel_value=${channel_value}"
       if [ "${channel_value}" = "null" ] || [ -z "${channel_value}" ]; then
         echo "payload is missing channel field"
         exit 1
