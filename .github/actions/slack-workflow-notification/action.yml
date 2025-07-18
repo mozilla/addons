@@ -90,6 +90,7 @@ runs:
         fi
 
         echo "text=${text}" >> "${GITHUB_OUTPUT}"
+        echo "slack_channel=${slack_channel}" >> "${GITHUB_OUTPUT}"
         cat "${GITHUB_OUTPUT}"
 
     - name: Notify Slack
@@ -98,6 +99,6 @@ runs:
         slack_token: ${{ inputs.slack_token }}
         method: chat.postMessage
         payload: |
-          channel: "${{ inputs.slack_channel }}"
+          channel: "${{ steps.context.outputs.slack_channel }}"
           text: ${{ toJSON(steps.context.outputs.text) }}
         dry_run: ${{ inputs.dry_run }}
