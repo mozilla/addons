@@ -12,6 +12,24 @@ env:
   SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_TEST }}
 
 jobs:
+  test_actions:
+    permissions:
+      contents: 'read'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [actionlint, zizmor]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Run ${{ matrix.target }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: make ${{ matrix.target }}
+
   slack_action_payload:
     runs-on: ubuntu-latest
     name: Test Slack Action ${{ matrix.name }}
