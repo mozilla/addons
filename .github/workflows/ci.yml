@@ -11,6 +11,8 @@ on:
 env:
   SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL_TEST }}
 
+permissions: {}
+
 jobs:
   test_actions:
     permissions:
@@ -31,6 +33,8 @@ jobs:
         run: make ${{ matrix.target }}
 
   slack_action_payload:
+    permissions:
+        contents: 'read'
     runs-on: ubuntu-latest
     name: Test Slack Action ${{ matrix.name }}
     strategy:
@@ -110,6 +114,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Slack Action Payload
         id: slack
@@ -164,6 +170,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: "Test Slack Action: ${{ matrix.name }}"
         id: slack
@@ -173,7 +181,7 @@ jobs:
           # We explicitly don't pass the slack token so that we can test
           # If the action actually attempts to send a message. This would
           # fail and we can assert that an attempt was made to send the message.
-          # slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          slack_token: ''
           payload: |
             channel: ${{ vars.SLACK_CHANNEL_TEST }}
             text: "Dry run is '${{ matrix.dry_run }}'"
@@ -270,6 +278,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Slack Workflow Notification
         uses: ./.github/actions/slack-workflow-notification

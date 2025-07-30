@@ -11,9 +11,13 @@ on:
 env:
   docs_artifact: docs
 
+permissions: {}
+
 jobs:
   context:
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
 
     outputs:
       is_release_master: ${{ steps.context.outputs.is_release_master }}
@@ -22,14 +26,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
       - id: context
         uses: ./.github/actions/context
 
   docs_build:
+    permissions:
+      contents: 'read'
+      actions: 'write'
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
