@@ -9,6 +9,8 @@ on:
   schedule:
   - cron: '41 0 * * *'
 
+permissions: {}
+
 jobs:
   stale:
 
@@ -22,7 +24,7 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         stale-issue-message: >
           This issue has been automatically marked as stale because it has not had
-          recent activity. If you think this bug should stay open, please comment on 
+          recent activity. If you think this bug should stay open, please comment on
           the issue with further details. Thank you for your contributions.
         stale-issue-label: 'state:stale'
         days-before-stale: 180

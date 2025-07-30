@@ -33,15 +33,16 @@ runs:
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.github_token }}
+        repo: ${{ inputs.repo }}
+        pr_number: ${{ inputs.pr }}
+        edit_last: ${{ inputs.edit_last }}
+        body: ${{ inputs.body }}
       run: |
         # --- Input variables ---
-        repo="${{ inputs.repo }}"
-        pr_number="${{ inputs.pr }}"
-        edit_last="${{ inputs.edit_last }}"
         tmp_file=$(mktemp)
 
         cat <<'EOF' > "$tmp_file"
-        ${{ inputs.body }}
+        ${body}
         EOF
 
         args="--repo ${repo} --body-file $tmp_file --create-if-none"
