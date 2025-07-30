@@ -70,7 +70,7 @@ runs:
 
   - name: Send Message
     if: ${{ steps.context.outputs.send_message == 'true' }}
-    uses: slackapi/slack-github-action@v2.0.0
+    uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a
     with:
       errors: true
       token: ${{ inputs.slack_token }}
