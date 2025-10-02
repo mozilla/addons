@@ -4,7 +4,6 @@ Push duty rotates each week to another developer. The current rotation is:
 
 - eviljeff
 - mat
-- kmeinhardt
 
 Check out the [Add-ons calendar](https://calendar.google.com/calendar/embed?src=mozilla.com_lr5jsh38i6dmr72uu4d1nv7dcc@group.calendar.google.com) for a list of events.
 
