@@ -126,7 +126,7 @@ before tagging, and then creating and pushing a git tag to the Extension
 Workshop repository will deploy it to production. You should manually
 verify the site on prod after the push has been completed. Visit
 https://extensionworkshop.com and view any pages that have been changed
-since the last push to verify they exist and are rendering properly.
+since the last push to verify they exist and are rendering properly. ::
 
     $ git checkout master
     $ git pull
