@@ -1,4 +1,4 @@
 # For buildings docs locally
 sphinx==8.2.3
 readthedocs-sphinx-ext==2.2.5
-myst-parser==4.0.1
+myst-parser==5.0.0
