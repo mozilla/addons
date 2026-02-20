@@ -40,3 +40,6 @@ Make some changes then build the docs:
 
 Open `docs/_build/html/index.html` to preview your changes before creating a
 pull request.
+
+
+> **Note:** Make sure your Python virtual environment is activated before installing dependencies.
