@@ -1,4 +1,4 @@
-# release-docs
+# Releasing AMO
 
 Until August 22nd 2024, we managed our release documents manually in the addons repository (see [release-docs.rst][addons-releases]).
 
@@ -8,18 +8,22 @@ Currently, [addons-server][addons-server] is the only repository deploying via [
 
 To create a new release, use the [draft release workflow][draft-release-workflow].
 
-<img src="../../images/draft_release.png" width="50%">
+<img src="../images/draft_release.png" width="50%">
 
 This will create a new draft release in the repository. This release can be updated with instructions and things to note for the next push.
-You need to set the push hero (see [push-duty](./index.md) for the rotation) as the assignee for the draft release.
-You also need to specify the next push date. This will be roughly 2 weeks after the current push. The exact date will correspond
-with the next jira sprint.
+You need to set the push hero (see [push-duty](./index.md) for the rotation) as the assignee for the draft release. and the next push date, in `YYYY.MM.DD` format. This should be 2 weeks after the current push, the exact date will correspond with the next jira sprint.
 
-## Publishing a release
+## Deploying to stage
 
-During the tag, we can trigger a staging deployment for `addons-server` by publishing the current draft release
-that should have been created at the end of the last push. It will likely be the first release in the [list][addons-server-releases]
-and will match the current push tag date.
+During the release process, we can trigger a staging deployment for `addons-server` by publishing the current draft release that should have been created at the end of the last push. It will likely be the first release in the [list][addons-server-releases] and will match the current push tag date.
+
+### Handling addons-frontend
+
+addons-frontend is currently not using GitHub Actions, so manual tagging is required. See [tag-services][./tag-services.md]. Once the tag has been pushed, CI will run and eventually a new docker image should be built and deployed to stage.
+
+You can then go back to addons-server draft release to update the compare link to the previous tag for addons-frontend.
+
+### Publishing a release
 
 In order to publish the release, click the edit icon at the top right of the release card.
 
@@ -27,13 +31,13 @@ In order to publish the release, click the edit icon at the top right of the rel
 - Publish the release by clicking the `Publish release` button.
 - Include the compare link for `addons-frontend`. See [tagging](./tag-services.md) for details.
 
-<img src="../../images/publish_release.png" width="50%">
+<img src="../images/publish_release.png" width="50%">
 
 ```{warning}
 Make sure that the release is tagged as "latest". This is the default behavior but don't accidentally un-check it.
 ```
 
-<img src="../../images/latest_release.png" width="50%">
+<img src="../images/latest_release.png" width="50%">
 
 Publishing a release will trigger the [release workflow][release-workflow].
 
@@ -52,9 +56,14 @@ to see workflows triggered by a release event that failed.
 We should include slack notifications for failed CI, especially on deployment triggering workflow runs.
 ```
 
+## Deploying to production
+
+Follow [documentation in Confluence about how to deploy with ArgoCD][deploy-argo-cd].
+
 [failed-ci-query]: https://github.com/mozilla/addons-server/actions/workflows/ci.yml?query=event%3Arelease+is%3Afailure
 [release-workflow]: https://github.com/mozilla/addons-server/actions/workflows/release.yml
 [draft-release-workflow]: https://github.com/mozilla/addons-server/actions/workflows/draft_release.yml
 [addons-server]: https://github.com/mozilla/addons-server
 [addons-server-releases]: https://github.com/mozilla/addons-server/releases
 [addons-releases]: https://github.com/mozilla/addons/tree/main/releases
+[deploy-argo-cd]: https://mozilla-hub.atlassian.net/wiki/spaces/SRE/pages/27921597/AMO+Dev+Resources#ArgoCD
