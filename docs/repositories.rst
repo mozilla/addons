@@ -17,30 +17,30 @@ An API for building add-ons that works with e10s and is compatible with Google C
 GitHub
 ------
 
-Almost everything else is on GitHub and issues are tracked in GitHub. This is a non-exhaustive list. Other repositories and libraries do appear around these main libraries:
+Almost everything else is on GitHub and issues are tracked in GitHub. This is a non-exhaustive list. Other repositories and libraries do appear around these main repositories:
 
 addons
 ~~~~~~
 `These docs <https://mozilla.github.io/addons/>`__ and an issue tracker. `This repository <https://github.com/mozilla/addons>`__ serves as an umbrella for everything add-ons.
-Bug tracker is in GitHub and can be used for almost anything add-ons related. `Existing bugs <https://github.com/mozilla/addons/issues/>`__.
+Bug tracker is in GitHub and can be used for almost anything add-ons related. `Existing issues <https://github.com/mozilla/addons/issues/>`__.
+
+addons-frontend
+~~~~~~~~~~~~~~~~~~~
+The `addons.mozilla.org <https://addons.mozilla.org/>`__ website. The `repository <https://github.com/mozilla/addons-frontend>`__ is on GitHub.
 
 addons-server
 ~~~~~~~~~~~~~
-The `addons.mozilla.org <https://addons.mozilla.org/>`__ website. The `repository <https://github.com/mozilla/addons-server>`__ and `issue tracker <https://github.com/mozilla/addons-server/issues/>`__ is on GitHub. Documentation is `on github pages <https://mozilla.github.io/addons/>`__.
+Complement to addons-frontend, this contains API, Developer Hub, Reviewer Tools and Admin Tools for AMO. The `repository <https://github.com/mozilla/addons-server>`__ is on GitHub. Documentation is `on GitHub pages <https://mozilla.github.io/addons/>`__.
 
 In the past this repository has been known as *remora*, *zamboni* or *olympia*.
 
-addons-code-manager
-~~~~~~~~~~~~~~~~~~~
-A web application to manage add-on source code, such as reviewing code for add-ons submitted to addons.mozilla.org. The `repository <https://github.com/mozilla/addons-code-manager>`__ and `issue tracker <https://github.com/mozilla/addons-code-manager/issues/>`__ is on GitHub.
+addons-blog
+~~~~~~~~~~~
+Static content generator for AMO's blog, `addons.mozilla.org/blog <https://addons.mozilla.org/blog/>`__.
 
 addons-linter
 ~~~~~~~~~~~~~
 The linter checks WebExtensions for common errors and potential problems. It is used on `addons.mozilla.org <https://addons.mozilla.org/>`__ and `web-ext <https://github.com/mozilla/web-ext/>`__. It can also be run in stand-alone mode. The `repository <https://github.com/mozilla/addons-linter>`__, `issue tracker <https://github.com/mozilla/addons-linter/issues/>`__ and `documentation <https://mozilla.github.io/addons-linter/>`__ is on GitHub.
-
-dispensary
-~~~~~~~~~~
-The dispensary collects and offers hashes of popular JavaScript libraries, mainly for the Mozilla's `addons-linter <https://github.com/mozilla/addons-linter>`__. The `repository <https://github.com/mozilla/dispensary>`__ and `issue tracker <https://github.com/mozilla/dispensary/issues/>`__ is on GitHub.
 
 web-ext
 ~~~~~~~
