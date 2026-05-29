@@ -16,14 +16,13 @@ Contents:
    repositories.rst
    browser/index.rst
    l10n.rst
-   server/index.rst
+   push_duty/index.md
    ux/index.rst
    random/index.rst
 
 Filing bugs:
 
-* Github on `this repository <https://github.com/mozilla/addons/issues>`_.
-* Bugzilla
+* See [repositories](./repositories.rst)
 
 Indices and tables
 ==================
