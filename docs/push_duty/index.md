@@ -2,8 +2,11 @@
 
 Production deploys are scheduled every other week. Push duty rotates each deploy to another developer. The current rotation is:
 
-- eviljeff
-- mat
+- [Andrew](https://people.mozilla.org/p/eviljeff)
+- [Mathieu](https://people.mozilla.org/p/mat)
+- [Christina](https://people.mozilla.org/p/chrlin)
+- [William](https://people.mozilla.org/p/willdurand)
+- [Benjamin](https://people.mozilla.org/p/bgrant)
 
 ## Before the push
 
