@@ -2,7 +2,7 @@
 
 Until August 22nd 2024, we managed our release documents manually in the addons repository (see [release-docs.rst][addons-releases]).
 
-Currently, [addons-server][addons-server] is the only repository deploying via [github releases][addons-server-releases].
+Currently, [addons-server][addons-server] and [addons-frontend][addons-frontend] are the only repositories deploying via [github releases][addons-server-releases].
 
 ## Creating a new release
 
@@ -19,7 +19,9 @@ During the release process, we can trigger a staging deployment for `addons-serv
 
 ### Handling addons-frontend
 
-addons-frontend is currently not using GitHub Actions, so manual tagging is required. See [tag-services][./tag-services.md]. Once the tag has been pushed, CI will run and eventually a new docker image should be built and deployed to stage.
+addons-frontend is deployed separately from addons-server. The same process of creating and publishing a new release applies to addons-frontend.
+
+addons-frontend `blog-utils` is currently not using GitHub Actions, so manual tagging is required. See [tag-services][./tag-services.md]. Once the tag has been pushed, CI will run and a new npm packaged will be pushed.
 
 You can then go back to addons-server draft release to update the compare link to the previous tag for addons-frontend.
 
@@ -65,5 +67,6 @@ Follow [documentation in Confluence about how to deploy with ArgoCD][deploy-argo
 [draft-release-workflow]: https://github.com/mozilla/addons-server/actions/workflows/draft_release.yml
 [addons-server]: https://github.com/mozilla/addons-server
 [addons-server-releases]: https://github.com/mozilla/addons-server/releases
+[addons-frontend]: https://github.com/mozilla/addons-frontend
 [addons-releases]: https://github.com/mozilla/addons/tree/main/releases
 [deploy-argo-cd]: https://mozilla-hub.atlassian.net/wiki/spaces/SRE/pages/27921597/AMO+Dev+Resources#ArgoCD

@@ -4,10 +4,14 @@
 
 `addons-server` is automatically tagged when a release is published. See [release-docs](./release-docs.md) for more information.
 
-For now, `addons-frontend` is still manually tagged.
+`addons-frontend` is also automatically tagged.
+
+But `addons-frontend` `blog-utils` is currently not using GitHub Actions, so manual tagging is required.
 To create and push a new tag follow these steps:
 
-Tags are of the format: ``YYYY.MM.DD``,
+`blog-utils` tags are of the format `blog-utils-{semver}`
+
+Other tags are of the format: ``YYYY.MM.DD``,
 
 ```{note}
 The date is the date of the push, not the date of tagging.
