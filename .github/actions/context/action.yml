@@ -74,16 +74,16 @@ runs:
       run: |
         # Stable check for if the workflow is running on the default branch
         # https://stackoverflow.com/questions/64781462/github-actions-default-branch-variable
-        is_default_branch="${{ format('refs/heads/{0}', env.default_branch) == github.ref }}"
+        is_default_branch="${{ env.ref_name == env.default_branch }}"
 
-        # In most events, the epository refers to the head which would be the fork
+        # In most events, the repository refers to the head which would be the fork
         is_fork="${{ github.event.repository.fork }}"
         # Default version is the branch name
         docker_version="${ref_name}"
 
         # This is different in a pull_request where we need to check the head explicitly
         if [[ "${{ github.event_name }}" == 'pull_request' ]]; then
-          # repository on a pull request refers to the base which is always mozilla/<repsotory>
+          # repository on a pull request refers to the base which is always mozilla/<repository>
           is_head_fork="${{ github.event.pull_request.head.repo.fork }}"
           # https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions
           is_dependabot="${{ github.actor == 'dependabot[bot]' }}"
