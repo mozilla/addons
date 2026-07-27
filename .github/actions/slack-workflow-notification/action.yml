@@ -93,12 +93,7 @@ runs:
         cat "${GITHUB_OUTPUT}"
 
     - name: Notify Slack
-      # This action uses another action defined in the same repository.
-      # Github action does not support dynamic version selection so we have to pick
-      # a single version. Pinning to a commit hash is not a great idea because we have to
-      #manage multiple cascading version updates for the action and this file cannot reference
-      # it's own git hash.
-      uses: mozilla/addons/.github/actions/slack@main # zizmor: ignore[unpinned-uses]
+      uses: mozilla/addons/.github/actions/slack@43401a931ebc09f2e511deed766171b0105414bc
       with:
         slack_token: ${{ inputs.slack_token }}
         method: chat.postMessage
