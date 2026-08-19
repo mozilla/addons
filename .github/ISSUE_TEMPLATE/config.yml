@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: AMO Matrix channel
-    url: https://matrix.to/#/#amo:mozilla.org
+  - name: Security Bug Report
+    url: https://www.mozilla.org/en-US/security/web-bug-bounty/
+    about: File security-related bugs via our bug bounty program
+  - name: AMO Discourse
+    url: https://discourse.mozilla.org/c/add-ons/35
     about: Please ask and answer questions here.
