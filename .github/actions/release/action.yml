@@ -1,0 +1,90 @@
+name: Draft Release
+description: Prepare a draft GitHub release from a merged release pull request
+
+# Nothing is released until someone publishes the draft. See the README for the
+# release process and for a workflow calling this action, which needs
+# `contents: write`.
+
+inputs:
+  repo:
+    required: true
+    description: The name of the repository
+  sha:
+    required: true
+    description: >
+      The merge commit to release: it is the target of the release, its title
+      has the version and its description has the release notes.
+  github_token:
+    required: true
+    description: The GitHub token
+
+outputs:
+  version:
+    description: The version of the draft release
+    value: ${{ steps.release.outputs.version }}
+  url:
+    description: The URL of the draft release
+    value: ${{ steps.release.outputs.url }}
+
+runs:
+  using: composite
+  steps:
+    - name: Prepare the draft release
+      id: release
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+        GH_REPO: ${{ inputs.repo }}
+        sha: ${{ inputs.sha }}
+      run: |
+        set -o pipefail
+
+        # The response is not piped directly into `jq` so that a failing
+        # `gh api` call fails this step, instead of looking like a commit
+        # without a description.
+        commit=$(gh api "repos/$GH_REPO/commits/$sha")
+        parents=$(printf '%s' "$commit" | jq '.parents | length')
+        message=$(printf '%s' "$commit" | jq -r .commit.message)
+        title=$(printf '%s\n' "$message" | head -n 1)
+
+        # The title is the one of the pull request followed by its number,
+        # e.g. ":arrow_up: release 1.2.3 (#123)". That number cannot be
+        # mistaken for the version, as it has no dots.
+        version=$(printf '%s' "$title" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?' | head -n 1 || true)
+
+        if [ -z "$version" ]; then
+          echo "::error::no version found in the merge commit title: $title"
+          exit 1
+        fi
+
+        # The notes are the description of the squash-merge commit, i.e., the
+        # notes someone confirmed when merging, even when the release branch
+        # ended up with more than one commit. A "real" merge commit has no
+        # such description, so we let GitHub generate the notes in that case.
+        notes=""
+        if [ "$parents" -eq 1 ]; then
+          notes=$(printf '%s\n' "$message" | sed '1d' | sed '/./,$!d')
+        else
+          echo "::warning::the release pull request has not been squash-merged."
+        fi
+
+        if [ -z "$notes" ]; then
+          echo "::warning::no release notes found in the merge commit, generating them instead."
+          gh release create "$version" --draft --target "$sha" --title "$version" --generate-notes
+        else
+          printf '%s' "$notes" | gh release create "$version" --draft --target "$sha" --title "$version" --notes-file -
+        fi
+
+        url=$(gh release view "$version" --json url --jq .url)
+
+        echo "version=$version" >> "$GITHUB_OUTPUT"
+        echo "url=$url" >> "$GITHUB_OUTPUT"
+        cat "$GITHUB_OUTPUT"
+
+        {
+          echo "### The draft release for \`$version\` is ready"
+          echo ""
+          echo "Nothing has been released yet. Publishing this draft creates the \`$version\` tag, which publishes the package:"
+          echo ""
+          echo "$url"
+        } >> "$GITHUB_STEP_SUMMARY"
