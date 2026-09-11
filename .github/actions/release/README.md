@@ -7,9 +7,12 @@ and the notes are its description.
 ## Usage
 
 ```yaml
+name: Release
+
 on:
   pull_request:
     types: [closed]
+    # NOTE: some repos still use `master`.
     branches: [main]
 
 permissions: {}
@@ -23,17 +26,19 @@ jobs:
     permissions:
       # Required to create the draft release.
       contents: write
+      # Required to comment the draft release on the pull request.
+      pull-requests: write
 
     steps:
-      # Pin to a commit of `mozilla/addons`.
       - uses: mozilla/addons/.github/actions/release@43401a931ebc09f2e511deed766171b0105414bc
         with:
           repo: ${{ github.repository }}
           sha: ${{ github.event.pull_request.merge_commit_sha }}
+          pr: ${{ github.event.pull_request.number }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-All three inputs are required. Outputs: `version` and `url`.
+All four inputs are required. Outputs: `version` and `url`.
 
 ## Release process
 
@@ -53,7 +58,9 @@ Here is an example for an `npm` package:
    # Write the release notes in the description of this commit, also the commit
    # title might just be "$version" or something more fancy, but it must have
    # the version number in it.
-   git commit --edit --message ":arrow_up: release $version"
+   #
+   # `--cleanup=scissors` is used to allow markdown headers in the commit body.
+   git commit --edit --message ":arrow_up: release $version" --cleanup=scissors
    git push -u origin "releases/$version"
    ```
 

@@ -14,6 +14,9 @@ inputs:
     description: >
       The merge commit to release: it is the target of the release, its title
       has the version and its description has the release notes.
+  pr:
+    required: true
+    description: The number of the release pull request, to comment the draft on
   github_token:
     required: true
     description: The GitHub token
@@ -36,6 +39,7 @@ runs:
         GH_TOKEN: ${{ inputs.github_token }}
         GH_REPO: ${{ inputs.repo }}
         sha: ${{ inputs.sha }}
+        pr: ${{ inputs.pr }}
       run: |
         set -o pipefail
 
@@ -81,10 +85,16 @@ runs:
         echo "url=$url" >> "$GITHUB_OUTPUT"
         cat "$GITHUB_OUTPUT"
 
-        {
-          echo "### The draft release for \`$version\` is ready"
-          echo ""
-          echo "Nothing has been released yet. Publishing this draft creates the \`$version\` tag, which publishes the package:"
-          echo ""
-          echo "$url"
-        } >> "$GITHUB_STEP_SUMMARY"
+        body=$(printf '%s\n' \
+          "### The draft release for \`$version\` is ready" \
+          "" \
+          "Nothing has been released yet. Publishing this draft creates the \`$version\` tag, which publishes the package:" \
+          "" \
+          "$url")
+
+        printf '%s\n' "$body" >> "$GITHUB_STEP_SUMMARY"
+
+        # Commenting is a convenience, so a missing `pull-requests: write`
+        # permission should not fail a release that has been drafted already.
+        printf '%s\n' "$body" | gh pr comment "$pr" --body-file - ||
+          echo "::warning::could not comment on the release pull request."
