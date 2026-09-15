@@ -2,8 +2,7 @@ name: Draft Release
 description: Prepare a draft GitHub release from a merged release pull request
 
 # Nothing is released until someone publishes the draft. See the README for the
-# release process and for a workflow calling this action, which needs
-# `contents: write`.
+# release process and for a workflow calling this action.
 
 inputs:
   repo:
@@ -86,11 +85,13 @@ runs:
         cat "$GITHUB_OUTPUT"
 
         body=$(printf '%s\n' \
-          "### The draft release for \`$version\` is ready" \
+          "**The draft release for \`$version\` is ready!**" \
           "" \
-          "Nothing has been released yet. Publishing this draft creates the \`$version\` tag, which publishes the package:" \
+          "Nothing has been released yet. The next step is to publish this draft release in order to create the \`$version\` tag (which will automatically publish the package): $url" \
           "" \
-          "$url")
+          "---" \
+          "" \
+          "ℹ️ [More information about this release process](https://github.com/mozilla/addons/tree/main/.github/actions/release#release-process)")
 
         printf '%s\n' "$body" >> "$GITHUB_STEP_SUMMARY"
 
