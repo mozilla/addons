@@ -25,7 +25,7 @@ runs:
 
     - name: login to GAR
       if: steps.gcp-auth.outcome == 'success'
-      uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
+      uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f
       with:
         registry: ${{ inputs.registry }}
         username: oauth2accesstoken
